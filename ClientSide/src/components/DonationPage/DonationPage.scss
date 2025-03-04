@@ -1,0 +1,72 @@
+.donation-page {
+    text-align: center;
+    padding: 40px;
+    background-color: #f8f9fa;
+  }
+  
+  .title {
+    font-size: 2rem;
+    color: #0056b3;
+    margin-bottom: 20px;
+  }
+  
+  .donation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .donation-card {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background: white;
+    transition: transform 0.3s ease;
+  }
+  
+  .donation-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .donation-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .donation-description {
+    color: #444;
+    font-size: 1rem;
+  }
+  
+//   .donate-button {
+//     background-color: #f4b400;
+//     color: white;
+//     font-weight: bold;
+//     width: 100%;
+//     margin-top: 10px;
+//   }
+
+.donate-button {
+    background-color: #4B5563; /* אפור כהה */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #374151; /* כהה יותר בעת ריחוף */
+    }
+  }
+  .custom-toast-secondary {
+    background-color: #6c757d !important; /* צבע אפור כמו secondary */
+    color: white !important;
+  }
+  
+  
