@@ -15,6 +15,8 @@ import About from './components/About/About';
 import DonationPage from './components/DonationPage/DonationPage';
 import DonationCart from './components/DonationCart/DonationCart';
 import { store, persistor } from '../src/redux/store'; // ייבוא נכון של ה-store וה-persistor
+import AddBasket from './components/AddBasket/AddBasket'; // ייבוא הקומפוננטה החדשה
+import { FaPlusCircle } from 'react-icons/fa'; // ייבוא אייקון
 
 
 // const persistConfig = {
@@ -44,7 +46,7 @@ function App() {
               <Route path='/' element={<About />}></Route>
               <Route path="/donation" element={<DonationPage />} />
               <Route path="/donationCart" element={<DonationCart setCartVisible={setCartVisible} />} />
-
+              <Route path="/add-basket" element={<AddBasket />} /> {/* נתיב חדש */}
             </Routes>
           </Router>
         </div>
