@@ -1,39 +1,26 @@
-export const uploadImage = async (file: File): Promise<string> => {
-    const formData = new FormData();
-    formData.append("image", file);
+import axios from "axios";
 
-    const response = await fetch("http://localhost:5000/basekt/upload", {
-        method: "POST",
-        body: formData,
+export const submitBasket = async (formData: FormData): Promise<any> => {
+    const response = await fetch("http://localhost:5000/basket/addBasket", {
+      method: "POST",
+      body: formData, // שליחה של ה-FormData
     });
-
+  
     if (!response.ok) {
-        throw new Error("Failed to upload image");
+      throw new Error("Failed to submit basket");
     }
-
-    const data: { imageUrl: string } = await response.json();
-    return data.imageUrl;
-};
-interface BasketData {
-    title: string;
-    description: string;
-    sum: number;
-    freeAmount: number;
-    image?: string;
-}
-
-export const submitBasket = async (basket: BasketData): Promise<any> => {
-    console.log("Sending basket:", basket);
-
-    const response = await fetch("http://localhost:5000/api/add", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"},
-            body: JSON.stringify(basket),
-    });
-
-    if(!response.ok) {
-        throw new Error("Failed to submit basket");
+  
+    return response;
+  };
+  
+  export const getDonationOptions = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/basket/getBasket"); // הנתיב המתאים
+      console.log(response.data.basekt)
+      return response.data.basket; // מחזיר את רשימת התרומות
+    } catch (error) {
+      console.error("Error fetching donation options:", error);
+      throw error; // זורק את השגיאה אם יש בעיה
     }
-    return response.json();
-}; 
+  };
+  

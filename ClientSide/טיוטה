@@ -1,0 +1,197 @@
+// // import { useState, ChangeEvent, FormEvent } from "react";
+// // import { Button, Form } from 'react-bootstrap';
+// // import { uploadImage, submitBasket } from "../../services/basketService";
+
+// // interface BasketData {
+// //   title: string;
+// //   description: string;
+// //   sum: number | "";
+// //   freeAmount: number | "";
+// // }
+
+// // const AddBasket: React.FC = () => {
+// //   const [basketData, setBasketData] = useState<BasketData>({
+// //     title: "",
+// //     description: "",
+// //     sum: "",
+// //     freeAmount: "",
+// //   });
+
+// //   const [image, setImage] = useState<File | null>(null);
+
+// //   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+// //     const { name, value } = e.target;
+// //     setBasketData({
+// //       ...basketData,
+// //       [name]: name === "sum" || name === "freeAmount" ? Number(value) || "" : value,
+// //     });
+// //   };
+
+// //   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+// //     if (e.target.files && e.target.files.length > 0) {
+// //       setImage(e.target.files[0]);
+// //     }
+// //   };
+
+// //   const handleSubmit = async (e: FormEvent) => {
+// //     e.preventDefault();
+// //     console.log("Basket Data:", basketData);
+// //     let imageUrl = "";
+// //     if (image) {
+// //       imageUrl = await uploadImage(image);
+// //     }
+// //     console.log("Image URL:", imageUrl);
+
+// //     await submitBasket({
+// //       ...basketData,
+// //       image: imageUrl,
+// //       sum: typeof basketData.sum === 'number' ? basketData.sum : 0,
+// //       freeAmount: typeof basketData.freeAmount === 'number' ? basketData.freeAmount : 0
+// //     });
+// //   };
+// // return (
+// //     <form onSubmit={handleSubmit} className="space-y-4 border rounded">
+// //       <Form.Control type="text" name="title" placeholder="Title" value={basketData.title} onChange={handleChange} required />
+// //       <Form.Control type="text" name="description" placeholder="Description" value={basketData.description} onChange={handleChange} required />
+// //       <Form.Control type="number" name="sum" placeholder="Sum" value={basketData.sum} onChange={handleChange} required />
+// //       <Form.Control type="number" name="freeAmount" placeholder="Free Amount" value={basketData.freeAmount} onChange={handleChange} required />
+// //       <Form.Control type="file" onChange={handleImageChange} accept="image/*" />
+// //       <Button type="submit">Submit</Button>
+// //     </form>
+// //   );
+// // };
+
+// // export default AddBasket;
+// import { useState, ChangeEvent, FormEvent } from "react";
+// import { Button, Form } from 'react-bootstrap';
+// import { submitBasket } from "../../services/basketService";
+// import { DonationOption } from "../../models/DonationOption";
+
+// // interface BasketData {
+// //   title: string;
+// //   description: string;
+// //   sum: number | "";
+// //   freeAmount: number | "";
+// // }
+
+// const AddBasket: React.FC = () => {
+//   const [basketData, setBasketData] = useState<DonationOption>({
+//     title: "",
+//     amount: "",
+//     sum: 0,
+//     description: "",
+//     image: "",
+//     freeAmount: false
+
+//   });
+
+//   const [image, setImage] = useState<File | null>(null);
+
+//   // const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+//   //   const { name, value } = e.target;
+//   //   setBasketData({
+//   //     ...basketData,
+//   //     [name]: name === "sum" || name === "freeAmount" ? Number(value) || "" : value,
+//   //   });
+//   // };
+//   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+//     const { name, value, type, checked } = e.target;
+
+//     // ניהול שדות בוליאניים
+//     if (type === "checkbox") {
+//       setBasketData({
+//         ...basketData,
+//         [name]: checked // עבור checkbox, value יהיה בוליאני
+//       });
+//     } else {
+//       setBasketData({
+//         ...basketData,
+//         [name]: name === "sum" || name === "freeAmount" ? Number(value) || "" : value,
+//       });
+//     }
+//   };
+
+//   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+//     if (e.target.files && e.target.files.length > 0) {
+//       setImage(e.target.files[0]);
+//     }
+//   };
+
+//   const handleSubmit = async (e: FormEvent) => {
+//     e.preventDefault();
+//     console.log("Basket Data:", basketData);
+
+//     // יצירת אובייקט FormData
+//     const formData = new FormData();
+
+//     // הוספת פרטי הסל ל-FormData
+//     formData.append("title", basketData.title);
+//     formData.append("description", basketData.description);
+//     formData.append("sum", String(basketData.sum));
+//     // formData.append("freeAmount",(basketData.freeAmount));
+//     // formData.append("freeAmount", String(basketData.freeAmount)); // המרת ערך הבוליאני למחרוזת
+//     formData.append("freeAmount", basketData.freeAmount ? '1' : '0'); // המרת ערך בוליאני למספר
+
+
+//     // אם יש תמונה, נוסיף אותה ל-FormData
+//     if (image) {
+//       formData.append("image", image);
+//     }
+
+//     // שליחה לשרת
+//     await submitBasket(formData);
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit} className="space-y-4 border rounded">
+//       <Form.Control type="text" name="title" placeholder="Title" value={basketData.title} onChange={handleChange} required />
+//       <Form.Control type="text" name="description" placeholder="Description" value={basketData.description} onChange={handleChange} required />
+//       <Form.Control type="number" name="sum" placeholder="Sum" value={basketData.sum} onChange={handleChange} required />
+//       <Form.Check
+//         type="checkbox"
+//         label="Free Amount"
+//         name="freeAmount"
+//         checked={basketData.freeAmount} // הערך יהיה true/false
+//         onChange={handleChange}
+//       />
+//       <Form.Control type="file" onChange={handleImageChange} accept="image/*" />
+//       <Button type="submit">Submit</Button>
+//     </form>
+//   );
+// };
+
+
+
+// export const uploadImage = async (file: File): Promise<string> => {
+//     const formData = new FormData();
+//     formData.append("image", file);
+
+//     const response = await fetch("http://localhost:5000/basekt/upload", {
+//         method: "POST",
+//         body: formData,
+//     });
+
+//     if (!response.ok) {
+//         throw new Error("Failed to upload image");
+//     }
+
+//     const data: { imageUrl: string } = await response.json();
+//     return data.imageUrl;
+// };
+
+
+// export const submitBasket = async (basket: BasketData): Promise<any> => {
+//     console.log("Sending basket:", basket);
+
+//     const response = await fetch("http://localhost:5000/api/add", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"},
+//             body: JSON.stringify(basket),
+//     });
+
+//     if(!response.ok) {
+//         throw new Error("Failed to submit basket");
+//     }
+//     return response.json();
+// }; 
