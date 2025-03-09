@@ -2,7 +2,7 @@ export const uploadImage = async (file: File): Promise<string> => {
     const formData = new FormData();
     formData.append("image", file);
 
-    const response = await fetch("/api/upload", {
+    const response = await fetch("http://localhost:5000/basekt/upload", {
         method: "POST",
         body: formData,
     });
@@ -23,7 +23,9 @@ interface BasketData {
 }
 
 export const submitBasket = async (basket: BasketData): Promise<any> => {
-    const response = await fetch("/api/basket", {
+    console.log("Sending basket:", basket);
+
+    const response = await fetch("http://localhost:5000/api/add", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"},

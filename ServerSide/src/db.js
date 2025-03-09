@@ -14,7 +14,7 @@ require('dotenv').config(); // טוען את משתני הסביבה מהקוב�
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: 'mysql24',
+    password: '1234',
     port: '3306',
     database: 'daatmeir'
 }).promise();
@@ -63,5 +63,14 @@ async function exampleUse() {
         console.log(`the error is: ${error}`) 
     }
 }
+pool.getConnection()
+    .then(connection => {
+        console.log("Connected to MySQL!");
+        connection.release(); // שחרר את החיבור
+    })
+    .catch(error => {
+        console.error("Failed to connect to MySQL:", error);
+    });
+
 
 module.exports = { get_query, create_query }

@@ -85,6 +85,8 @@ import NavBar from "../NavBar/NavBar";
 import { InputNumber } from 'primereact/inputnumber';
 import { Toast } from 'primereact/toast';
 import { useRef } from 'react';
+import "bootstrap-icons/font/bootstrap-icons.css"; 
+import { Link } from 'react-router-dom'; // ייבוא של Link
 
 
 const donationOptions: DonationOption[] = [
@@ -148,30 +150,30 @@ const DonationPage: FC<DonationPageProps> = () => {
 
 
 
-const handleAmountChange = (index: number, value: number) => {
-  setCustomAmounts(prev => ({
-    ...prev,
-    [index]: value
-  }));
-};
+  const handleAmountChange = (index: number, value: number) => {
+    setCustomAmounts(prev => ({
+      ...prev,
+      [index]: value
+    }));
+  };
 
-// const handleAddToCart = (donation: DonationOption, index: number) => {
-//   const amountToDonate = donation.freeAmount ? (customAmounts[index] || 0) : donation.sum;
-//   dispatch(addToCart({ ...donation, sum: amountToDonate }));
-// };
+  // const handleAddToCart = (donation: DonationOption, index: number) => {
+  //   const amountToDonate = donation.freeAmount ? (customAmounts[index] || 0) : donation.sum;
+  //   dispatch(addToCart({ ...donation, sum: amountToDonate }));
+  // };
 
-const handleAddToCart = (donation: DonationOption, index: number) => {
-  const amountToDonate = donation.freeAmount ? customAmounts[index] || 0 : donation.sum;
-  dispatch(addToCart({ ...donation, sum: amountToDonate }));
+  const handleAddToCart = (donation: DonationOption, index: number) => {
+    const amountToDonate = donation.freeAmount ? customAmounts[index] || 0 : donation.sum;
+    dispatch(addToCart({ ...donation, sum: amountToDonate }));
 
-  // הצגת הודעת הצלחה
-  toast.current?.show({
-    severity: "info",
-    summary: "תרומה נוספה בהצלחה",
-    className: "custom-toast-secondary",
-    life: 3000,
-  });
-};
+    // הצגת הודעת הצלחה
+    toast.current?.show({
+      severity: "info",
+      summary: "תרומה נוספה בהצלחה",
+      className: "custom-toast-secondary",
+      life: 3000,
+    });
+  };
 
 
 
@@ -180,8 +182,12 @@ const handleAddToCart = (donation: DonationOption, index: number) => {
       <NavBar></NavBar>
       <div className="donation-page">
         <h1 className="title">סלי צדקה - ברכה עבורכם</h1>
+        <Link to="/add-basket">
+        <i className="bi bi-basket-plus" style={{ fontSize: "30px", color: "blue", cursor: "pointer" }}></i>
+      </Link>
+
         <div className="donation-grid">
-        <Toast ref={toast} position="top-right" />
+          <Toast ref={toast} position="top-right" />
 
           {donationOptions.map((option, index) => (
             <Card
@@ -211,7 +217,7 @@ const handleAddToCart = (donation: DonationOption, index: number) => {
               ) : null}
               <Button
                 label="אני רוצה לתרום"
-                onClick={() => handleAddToCart(option,index)}
+                onClick={() => handleAddToCart(option, index)}
                 className="donate-button"
               />
             </Card>

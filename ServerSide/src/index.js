@@ -29,9 +29,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-app.use('/basekt', basketRoute)
+app.use('/api', basketRoute)
 app.listen(5000, () => {
     console.log(`app is listenning on port http://localhost:5000`)
 })
 
-// שלום

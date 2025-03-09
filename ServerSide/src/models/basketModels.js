@@ -13,19 +13,36 @@ async function getAllBaskets() {
     }
 }
 
-async function uploadImage(titel, description, sum, imagePath,freeAmount) {
+async function uploadImage(title, description, sum, imagePath,freeAmount) {
     try {
+        if (!imagePath) {
+            throw new Error("Image path is missing!");
+        }
         // כותב שאילתת INSERT למסד הנתונים כדי לשמור את פרטי הסל עם התמונה
-        const query = 'INSERT INTO baskets (titel,description, sum, image,  freeAmount) VALUES ( ?, ?, ?,?,?)';
-        const params = [titel, description, sum, imagePath,freeAmount];
+        const query = 'INSERT INTO baskets (title,description, sum, image,  freeAmount) VALUES ( ?, ?, ?,?,?)';
+        const params = [title, description, sum, imagePath,freeAmount];
         
         // מבצע את השאילתה
-        await create_query(query, params);
+      const result =  await create_query(query, params);
+      return { id: result.insertId, title, description, sum, freeAmount, image: imagePath };
     } catch (error) {
         console.error('Error saving image to the database:', error);
         throw error; // זורק שגיאה אם משהו לא עובד
     }
 }
+// שמירת סל גם בלי תמונה
+async function saveBasket(title, description, sum, freeAmount, image = null) {
+    try {
+        const query = 'INSERT INTO baskets (title, description, sum, freeAmount, image) VALUES (?, ?, ?, ?, ?)';
+        const params = [title, description, sum, freeAmount, image];
+
+        const result = await create_query(query, params);
+        return { id: result.insertId, title, description, sum, freeAmount, image };
+    } catch (error) {
+        console.error('Error saving basket to the database:', error);
+        throw error;
+    }
+}
 
 
-module.exports = { getAllBaskets,uploadImage };
+module.exports = { getAllBaskets,uploadImage,saveBasket };

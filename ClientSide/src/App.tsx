@@ -16,7 +16,7 @@ import DonationPage from './components/DonationPage/DonationPage';
 import DonationCart from './components/DonationCart/DonationCart';
 import { store, persistor } from '../src/redux/store'; // ייבוא נכון של ה-store וה-persistor
 import AddBasket from './components/AddBasket/AddBasket'; // ייבוא הקומפוננטה החדשה
-import { FaPlusCircle } from 'react-icons/fa'; // ייבוא אייקון
+
 
 
 // const persistConfig = {
