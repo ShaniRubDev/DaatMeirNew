@@ -1,9 +1,12 @@
 const multer = require('multer');
 const path = require('path');
 
+
+// בודק אם התיקייה קיימת, ואם לא, יוצר אותה
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads/'); // תיקייה בה התמונות יישמרו
+        cb(null, 'src/uploads/'); // תיקייה בה התמונות יישמרו
     },
     filename: (req, file, cb) => {
         const title = req.body.title;  // משתמשים ב-title מה-body של הבקשה

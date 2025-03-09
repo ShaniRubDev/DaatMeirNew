@@ -14,6 +14,7 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const publicPath = path.join(__dirname, 'public');
+const uploadDir = path.join(__dirname, 'uploads');
 
 app.use(cors()); // Add this line
 app.use(express.static(publicPath));
@@ -27,9 +28,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //     // cookie: { secure: false }
 // }));
 
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+}
 
 
-app.use('/api', basketRoute)
+app.use('/uploads', express.static(path.join(__dirname, 'src/uploads')));
+app.use('/basket', basketRoute)
 app.listen(5000, () => {
     console.log(`app is listenning on port http://localhost:5000`)
 })

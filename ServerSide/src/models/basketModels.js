@@ -13,7 +13,7 @@ async function getAllBaskets() {
     }
 }
 
-async function uploadImage(title, description, sum, imagePath,freeAmount) {
+async function uploadImageToDB(title, description, sum, imagePath,freeAmount) {
     try {
         if (!imagePath) {
             throw new Error("Image path is missing!");
@@ -45,4 +45,4 @@ async function saveBasket(title, description, sum, freeAmount, image = null) {
 }
 
 
-module.exports = { getAllBaskets,uploadImage,saveBasket };
+module.exports = { getAllBaskets,uploadImageToDB,saveBasket };

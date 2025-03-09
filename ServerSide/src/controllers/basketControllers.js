@@ -1,8 +1,7 @@
 
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const { getAllBaskets, uploadImage, saveBasket } = require('../models/basketModels')
-// const uploadImage = require('../models/basketModels'); 
+const { getAllBaskets, uploadImageToDB, saveBasket } = require('../models/basketModels')
 
 // const { isExist, saveRefreshToken } = require('../models/userModel')
 
@@ -11,8 +10,15 @@ async function getListBsket(req, res, next) {
     const basket = await getAllBaskets();
     if (basket) {
         console.log(basket)
+        const basketsWithFullImagePath = basket.map(basketItem => {
+            const imageUrl = `http://localhost:5000${basketItem.image}`; // אנחנו מניחים שהכתובת שלך היא localhost:5000
+            return {
+                ...basketItem,
+                image: imageUrl // מוסיף את URL המלא לתמונה
+            };
+        });
 
-        res.status(200).json({ basket: { basket } });
+        res.status(200).json({ basket:  basket  });
     }
     else {
         res.status(403).json({ message: "erorr" });
@@ -34,7 +40,7 @@ async function uploadImageToBasket(req, res) {
      
      
         const { title, description, sum, freeAmount } = req.body;// מקבל פרטי הסל מהלקוח
-        const newBasket = await uploadImage(title, description, sum, imagePath, freeAmount);; // קריאה למודל
+        const newBasket = await uploadImageToDB(title, description, sum, imagePath, freeAmount);; // קריאה למודל
 
         // מחזיר תשובה ללקוח
         res.status(201).json({ message: 'Image uploaded and basket saved successfully!', basket: newBasket });

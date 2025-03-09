@@ -14,7 +14,7 @@ require('dotenv').config(); // טוען את משתני הסביבה מהקוב�
 const pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
-    password: '1234',
+    password: 'mysql24',
     port: '3306',
     database: 'daatmeir'
 }).promise();
