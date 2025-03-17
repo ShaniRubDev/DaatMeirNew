@@ -16,6 +16,8 @@ import DonationPage from './components/DonationPage/DonationPage';
 import DonationCart from './components/DonationCart/DonationCart';
 import { store, persistor } from '../src/redux/store'; // ייבוא נכון של ה-store וה-persistor
 import AddBasket from './components/AddBasket/AddBasket'; // ייבוא הקומפוננטה החדשה
+import DeleteBasket from './components/DeleteBasket/DeleteBasket';
+
 
 
 
@@ -47,6 +49,8 @@ function App() {
               <Route path="/donation" element={<DonationPage />} />
               <Route path="/donationCart" element={<DonationCart setCartVisible={setCartVisible} />} />
               <Route path="/add-basket" element={<AddBasket />} /> {/* נתיב חדש */}
+              <Route path="/manage-basket" element={<DeleteBasket/>} /> {/* נתיב חדש */}
+
             </Routes>
           </Router>
         </div>

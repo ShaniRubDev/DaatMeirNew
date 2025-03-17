@@ -9,6 +9,7 @@ import { Messages } from 'primereact/messages';
 
 export default function AddBasketWithImageUpload() {
     const toast = useRef<Toast>(null);
+    const [prevSum, setPrevSum] = useState(0); // משתנה לשמירת הסכום הקודם
     const msgs = useRef<Messages>(null);  // עבור הודעות
     const [basketData, setBasketData] = useState({
         title: "",
@@ -19,21 +20,47 @@ export default function AddBasketWithImageUpload() {
     const [image, setImage] = useState<File | null>(null);
 
 
+    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const { name, value, type, checked } = e.target;
+    //     if (type === 'checkbox') {
+    //         setBasketData({
+    //             ...basketData,
+    //             [name]: checked,
+    //         });
+    //     } else {
+    //         setBasketData({
+    //             ...basketData,
+    //             [name]: name === "sum" || name === "freeAmount" ? Number(value) || "" : value,
+    //             sum: checked ? 0 : basketData.sum, // מאפס את sum אם freeAmount נבחר
+
+    //         });
+    //     }
+    // };
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value, type, checked } = e.target;
-        if (type === 'checkbox') {
-            setBasketData({
-                ...basketData,
-                [name]: checked,
-            });
-        } else {
-            setBasketData({
-                ...basketData,
-                [name]: name === "sum" || name === "freeAmount" ? Number(value) || "" : value,
-                sum: checked ? 0 : basketData.sum, // מאפס את sum אם freeAmount נבחר
-
-            });
-        }
+    
+        setBasketData((prev) => {
+            if (name === "freeAmount") {
+                return {
+                    ...prev,
+                    freeAmount: checked,
+                    sum: checked ? 0 : prevSum, // אם freeAmount מסומן - sum יהיה 0, אחרת הוא יחזור לערך הקודם
+                };
+            } else if (name === "sum") {
+                const numericValue = Number(value) || 0;
+                setPrevSum(numericValue); // שמור את הערך של sum לפני שינויים
+                return {
+                    ...prev,
+                    sum: numericValue,
+                };
+            } else {
+                return {
+                    ...prev,
+                    [name]: value,
+                };
+            }
+        });
     };
 
     const onUpload = () => {
@@ -136,7 +163,8 @@ export default function AddBasketWithImageUpload() {
                               placeholder="Enter sum"
                               value={basketData.sum}
                               onChange={handleChange}
-                              required
+                              required={!basketData.sum}  // אם freeAmount נבחר, השדה sum לא יהיה חובה
+                              disabled={basketData.freeAmount}
                               className="rounded"
                           />
                       </Form.Group>
@@ -150,7 +178,8 @@ export default function AddBasketWithImageUpload() {
                               checked={basketData.freeAmount}
                               onChange={handleChange}
                               className="mt-2"
-                              required={!basketData.freeAmount}  // אם freeAmount נבחר, השדה sum לא יהיה חובה
+                            //   required={!basketData.freeAmount}  // אם freeAmount נבחר, השדה sum לא יהיה חובה
+                            required={!basketData.sum && !basketData.freeAmount}  // לפחות אחד מהם חייב להיות מלא
 
                           />
                       </Form.Group>

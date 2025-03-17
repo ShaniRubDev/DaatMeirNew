@@ -74,28 +74,49 @@ const DonationPage: FC<DonationPageProps> = () => {
   const [customAmounts, setCustomAmounts] = useState<{ [key: number]: number }>({});
   const [addedToCart, setAddedToCart] = useState<{ [key: number]: boolean }>({});
   const toast = useRef<Toast>(null);
+  // useEffect(() => {
+  //   // שימוש בשירות כדי להביא את התרומות
+  //   const fetchDonationOptions = async () => {
+  //     try {
+  //       const options = await getDonationOptions(); // קריאה לשירות
+  //       console.log("Fetched donation options:", options.basket); // בדיקה
+  //       if (Array.isArray(options.basket)) {
+  //         console.log("it is arry!")
+  //         console.log(`the options set to`+options.basket)
+  //         setDonationOptions(options.basket);
+  //       } else {
+  //         console.error("Error: API response is not an array", options);
+  //         setDonationOptions([]); // הגנה מפני קריסה
+  //       }
+  //       setDonationOptions(options.baskets); // שמירת התרומות בסטייט
+  //     } catch (error) {
+  //       console.error("Error fetching donation options:", error);
+        
+  //     }
+  //   };
+
+  //   fetchDonationOptions();
+  // }, []);
+
   useEffect(() => {
-    // שימוש בשירות כדי להביא את התרומות
     const fetchDonationOptions = async () => {
       try {
         const options = await getDonationOptions(); // קריאה לשירות
-        console.log("Fetched donation options:", options); // בדיקה
-        if (Array.isArray(options)) {
-          setDonationOptions(options);
+        console.log("Fetched donation options:", JSON.stringify(options.basket, null, 2)); // הדפסה של התשובה בפורמט קריא
+        if (Array.isArray(options.basket)) {
+          console.log("it is array!")
+          setDonationOptions(options.basket); // שמירה בסטייט
         } else {
           console.error("Error: API response is not an array", options);
           setDonationOptions([]); // הגנה מפני קריסה
         }
-        setDonationOptions(options.baskets); // שמירת התרומות בסטייט
       } catch (error) {
         console.error("Error fetching donation options:", error);
-        
       }
     };
-
+  
     fetchDonationOptions();
   }, []);
-
 
   const handleAmountChange = (index: number, value: number) => {
     setCustomAmounts(prev => ({
@@ -138,13 +159,14 @@ const DonationPage: FC<DonationPageProps> = () => {
         <div className="donation-grid">
           <Toast ref={toast} position="top-right" />
 
-          {donationOptions.map((option, index) => (
+          {donationOptions?.map((option, index) => (
+        
             <Card
               key={index}
               title={option.title}
-              subTitle={option.amount}
+              subTitle={option.sum}
               header={
-                <img alt={option.title} src={option.image} className="donation-image" />
+                <img alt={option.title} src={`http://localhost:5000${option.image}`} className="donation-image" />
               }
               className="donation-card"
             >
