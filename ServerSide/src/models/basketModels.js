@@ -43,6 +43,16 @@ async function saveBasket(title, description, sum, freeAmount, image = null) {
         throw error;
     }
 }
+async function deleteBasketFromDB(id) {
+    try {
+        const query = 'DELETE FROM baskets WHERE id = ?';
+        const params = [id];
+        const result = await create_query(query, params);
+        return result;  // מחזיר את התוצאה של המחיקה (אם הצליחה או לא)
+    } catch (error) {
+        console.error('Error deleting basket:', error);
+        throw error;
+    }
+}
 
-
-module.exports = { getAllBaskets,uploadImageToDB,saveBasket };
+module.exports = { getAllBaskets,uploadImageToDB,saveBasket ,deleteBasketFromDB };

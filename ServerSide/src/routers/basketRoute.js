@@ -1,6 +1,6 @@
 const express = require('express')
 const basketRoute = express.Router()
-const { getListBsket} = require ('../controllers/basketControllers')
+const { getListBsket , deleteBasket} = require ('../controllers/basketControllers')
 const upload = require('../middleware/uploadMiddleware');
 const { uploadImageToBasket} = require('../controllers/basketControllers');
  const { addBasket } = require('../controllers/basketControllers');
@@ -8,7 +8,10 @@ const { uploadImageToBasket} = require('../controllers/basketControllers');
 // console.log("basketControllers:", basketControllers);
 
 basketRoute.get('/getBasket',getListBsket)
+
 basketRoute.post('/addBasket',upload.single('image'),uploadImageToBasket); 
+
+basketRoute.delete('/deleteBasket/:id', deleteBasket);
 
 basketRoute.post('/add', addBasket);
 // basketRoute.post('/add', async (req, res) => {

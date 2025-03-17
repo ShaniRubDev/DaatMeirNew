@@ -17,6 +17,7 @@ async function getListBsket(req, res, next) {
                 image: imageUrl // מוסיף את URL המלא לתמונה
             };
         });
+        console.log(basket)
 
         res.status(200).json({ basket:  basket  });
     }
@@ -66,8 +67,24 @@ async function addBasket(req, res) {
         console.error(error);
         res.status(500).json({ message: 'Server error' });
     }
+}
+async function deleteBasket(req, res) {
+    try {
+        const { id } = req.params;
+        if (!id) {
+            return res.status(400).json({ message: 'Missing basket ID' });
+        }
 
-
+        const result = await deleteBasketFromDB(id);  // קריאה לפונקציה למחוק את הסל מהמסד נתונים
+        if (result.affectedRows > 0) {
+            res.status(200).json({ message: 'Basket deleted successfully' });
+        } else {
+            res.status(404).json({ message: 'Basket not found' });
+        }
+    } catch (error) {
+        console.error("Error deleting basket:", error);
+        res.status(500).json({ message: 'Server error' });
+    }
 }
 console.log("Exporting from basketControllers:", {
     getListBsket,
@@ -79,6 +96,7 @@ console.log("Exporting from basketControllers:", {
 module.exports = {
     getListBsket,
     uploadImageToBasket,
-    addBasket
+    addBasket,
+    deleteBasket
 };
 

@@ -17,8 +17,9 @@ const storage = multer.diskStorage({
         // אם יש title, משתמשים בו כדי ליצור שם קובץ
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
         const fileName = title.replace(/\s+/g, '-').toLowerCase() + '-' + uniqueSuffix + path.extname(file.originalname);
-        
+
         cb(null, fileName);  // שומר את הקובץ עם שם המבוסס על ה-title
+
     }
 });
 

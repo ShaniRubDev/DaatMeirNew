@@ -16,6 +16,9 @@ const cookieParser = require('cookie-parser');
 const publicPath = path.join(__dirname, 'public');
 const uploadDir = path.join(__dirname, 'uploads');
 
+// הדפס את הנתיב על מנת לוודא שהוא נכון
+console.log("Uploads folder path:", uploadDir);
+
 app.use(cors()); // Add this line
 app.use(express.static(publicPath));
 app.use(cookieParser());
@@ -33,9 +36,14 @@ if (!fs.existsSync(uploadDir)) {
 }
 
 
-app.use('/uploads', express.static(path.join(__dirname, 'src/uploads')));
+// app.use('/uploads', express.static(path.join(__dirname, 'src/uploads')));
+// app.use('/uploads', express.static(path.join(__dirname, 'src', 'uploads')));
+// app.use('/uploads', express.static(path.join('uploads')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
 app.use('/basket', basketRoute)
 app.listen(5000, () => {
-    console.log(`app is listenning on port http://localhost:5000`)
+    console.log(`app is listenning on port http://localhost:5001`)
 })
 
