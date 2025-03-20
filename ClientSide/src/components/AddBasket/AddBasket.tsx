@@ -1,140 +1,215 @@
-import { useState, ChangeEvent, FormEvent } from "react";
-import { Button, Form, Container, Card, Toast, ToastContainer } from "react-bootstrap";
-import { uploadImage, submitBasket } from "../../services/basketService";
 
-interface BasketData {
-  title: string;
-  description: string;
-  sum: number | "";
-  freeAmount: number | "";
-}
+// export default AddBasket;
+import React, { useRef, useState } from 'react';
+import { Toast } from 'primereact/toast';
+import { FileUpload } from 'primereact/fileupload';
+import { Button, Form, Row, Col } from 'react-bootstrap';
+import { submitBasket } from "../../services/basketService";
+import { Messages } from 'primereact/messages';
 
-const AddBasket: React.FC = () => {
-  const [basketData, setBasketData] = useState<BasketData>({
-    title: "",
-    description: "",
-    sum: "",
-    freeAmount: "",
-  });
-
-  const [image, setImage] = useState<File | null>(null);
-  const [showToast, setShowToast] = useState<boolean>(false);
-  const [toastMessage, setToastMessage] = useState<string>("");
-  const [toastVariant, setToastVariant] = useState<string>("success");
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setBasketData({
-      ...basketData,
-      [name]: name === "sum" || name === "freeAmount" ? Number(value) || "" : value,
+export default function AddBasketWithImageUpload() {
+    const toast = useRef<Toast>(null);
+    const [prevSum, setPrevSum] = useState(0); // משתנה לשמירת הסכום הקודם
+    const msgs = useRef<Messages>(null);  // עבור הודעות
+    const [basketData, setBasketData] = useState({
+        title: "",
+        description: "",
+        sum: 0,
+        freeAmount: false,
     });
-  };
+    const [image, setImage] = useState<File | null>(null);
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      setImage(e.target.files[0]);
-    }
-  };
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    console.log("Basket Data:", basketData);
-    let imageUrl = "";
-    if (image) {
-      imageUrl = await uploadImage(image);
-    }
-    console.log("Image URL:", imageUrl);
+    // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //     const { name, value, type, checked } = e.target;
+    //     if (type === 'checkbox') {
+    //         setBasketData({
+    //             ...basketData,
+    //             [name]: checked,
+    //         });
+    //     } else {
+    //         setBasketData({
+    //             ...basketData,
+    //             [name]: name === "sum" || name === "freeAmount" ? Number(value) || "" : value,
+    //             sum: checked ? 0 : basketData.sum, // מאפס את sum אם freeAmount נבחר
 
-    try {
-      await submitBasket({
-        ...basketData,
-        image: imageUrl,
-        sum: typeof basketData.sum === "number" ? basketData.sum : 0,
-        freeAmount: typeof basketData.freeAmount === "number" ? basketData.freeAmount : 0,
-      });
-      setToastMessage(":) הסל נוסף בהצלחה");
-      setToastVariant("success");
-    } catch (error) {
-      setToastMessage("אירעה שגיאה בעת הוספת הסל.");
-      setToastVariant("danger");
-    } finally {
-      setShowToast(true);
-    }
-  };
+    //         });
+    //     }
+    // };
 
-  return (
-    <Container className="d-flex justify-content-center align-items-center vh-100">
-      <Card className="p-4 shadow" style={{ width: "400px" }}>
-        <Card.Title className="text-center mb-3">הוספת סל</Card.Title>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3">
-            <Form.Label>כותרת</Form.Label>
-            <Form.Control type="text" name="title" value={basketData.title} onChange={handleChange} required />
-          </Form.Group>
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value, type, checked } = e.target;
 
-          <Form.Group className="mb-3">
-            <Form.Label>תיאור</Form.Label>
-            <Form.Control type="text" name="description" value={basketData.description} onChange={handleChange} required />
-          </Form.Group>
+        setBasketData((prev) => {
+            if (name === "freeAmount") {
+                return {
+                    ...prev,
+                    freeAmount: checked,
+                    sum: checked ? 0 : prevSum, // אם freeAmount מסומן - sum יהיה 0, אחרת הוא יחזור לערך הקודם
+                };
+            } else if (name === "sum") {
+                const numericValue = Number(value) || 0;
+                setPrevSum(numericValue); // שמור את הערך של sum לפני שינויים
+                return {
+                    ...prev,
+                    sum: numericValue,
+                };
+            } else {
+                return {
+                    ...prev,
+                    [name]: value,
+                };
+            }
+        });
+    };
 
-          <Form.Group className="mb-3">
-            <Form.Label>סכום</Form.Label>
-            <Form.Control type="number" name="sum" value={basketData.sum} onChange={handleChange} required />
-          </Form.Group>
+    const onUpload = () => {
+        toast.current?.show({
+            severity: 'info',
+            summary: 'Success',
+            detail: 'File Uploaded',
+        });
+    };
 
-          <Form.Group className="mb-3">
-            <Form.Label>כמות חופשית</Form.Label>
-            <Form.Control type="number" name="freeAmount" value={basketData.freeAmount} onChange={handleChange} required />
-          </Form.Group>
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        const formData = new FormData();
 
-          <Form.Group className="mb-3">
-            <Form.Label>העלה תמונה</Form.Label>
-            <Form.Control type="file" onChange={handleImageChange} accept="image/*" />
-          </Form.Group>
+        // הוספת פרטי סל לתוך FormData
+        formData.append("title", basketData.title);
+        formData.append("description", basketData.description);
+        formData.append("sum", String(basketData.sum));
+        formData.append("freeAmount", basketData.freeAmount ? '1' : '0');
 
-          <Button type="submit" variant="primary" className="w-100">
-            <i className="bi bi-cart-plus"></i> הוסף סל
-          </Button>
-        </Form>
-      </Card>
+        // אם יש תמונה, נוסיף אותה ל-FormData
+        if (image) {
+            formData.append("image", image);
+        }
 
-      {/* Toast for success or error message */}
-      <ToastContainer position="top-end" className="p-3">
-        <Toast
-          show={showToast}
-          onClose={() => setShowToast(false)}
-          delay={3000}
-          autohide
-          style={{
-            borderRadius: "10px",
-            boxShadow: "0 5px 15px rgba(0, 0, 0, 0.2)",
-            maxWidth: "350px",
-            zIndex: 1050,
-          }}
-        >
-          <Toast.Body
-            className={`d-flex justify-content-between align-items-center text-white p-3 ${
-              toastVariant === "success" ? "bg-success" : "bg-danger"
-            }`}
+        // שליחה לשרת
+        // await submitBasket(formData);
+        const response = await submitBasket(formData);
+        if (response.ok) {
+            msgs.current?.clear();  // מנקה הודעות ישנות
+            msgs.current?.show([
+                { severity: 'success', summary: 'Success', detail: 'Basket data submitted successfully!' },
+            ]);
+        } else {
+            msgs.current?.clear();
+            msgs.current?.show([
+                { severity: 'error', summary: 'Error', detail: 'Something went wrong. Please try again.' },
+            ]);
+        }
+
+    };
+
+    return (
+        <div
+            className="d-flex justify-content-center align-items-center"
             style={{
-              borderRadius: "10px",
-              fontSize: "16px",
-              fontWeight: "bold",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+                height: '100vh',
+                backgroundColor: ' #f1f5f9',
+                padding: '20px',
             }}
-          >
-            <span>{toastMessage}</span>
-            <i
-              className={`bi bi-${toastVariant === "success" ? "check-circle" : "x-circle"}`}
-              style={{ fontSize: "20px", marginLeft: "10px" }}
-            />
-          </Toast.Body>
-        </Toast>
-      </ToastContainer>
-    </Container>
-  );
-};
+        >
 
-export default AddBasket;
+            <div className="card flex justify-content-center p-4 shadow-lg" style={{ width: '100%', maxWidth: '600px' }}>
+                <Messages ref={msgs} />  {/* כאן ממוקמת הודעת ההצלחה או השגיאה */}
+                <Toast ref={toast}></Toast>
+                <form onSubmit={handleSubmit}>
+                    <h3 className="text-center mb-4">Add New Basket</h3>
+                    <Row className="mb-3">
+                        <Col sm={12}>
+                            <Form.Group controlId="title">
+                                <Form.Label>Title</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="title"
+                                    placeholder="Enter title"
+                                    value={basketData.title}
+                                    onChange={handleChange}
+                                    required
+                                    className="rounded"
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+
+                    <Row className="mb-3">
+                        <Col sm={12}>
+                            <Form.Group controlId="description">
+                                <Form.Label>Description</Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    name="description"
+                                    placeholder="Enter description"
+                                    value={basketData.description}
+                                    onChange={handleChange}
+                                    required
+                                    rows={3}
+                                    className="rounded"
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+
+                    <Row className="mb-3">
+                        <Col sm={12} md={6}>
+                            <Form.Group controlId="sum">
+                                <Form.Label>Sum</Form.Label>
+                                <Form.Control
+                                    type="number"
+                                    name="sum"
+                                    placeholder="Enter sum"
+                                    value={basketData.sum}
+                                    onChange={handleChange}
+                                    required={!basketData.sum}  // אם freeAmount נבחר, השדה sum לא יהיה חובה
+                                    disabled={basketData.freeAmount}
+                                    className="rounded"
+                                />
+                            </Form.Group>
+                        </Col>
+                        <Col sm={12} md={6}>
+                            <Form.Group controlId="freeAmount">
+                                <Form.Check
+                                    type="checkbox"
+                                    label="Free Amount"
+                                    name="freeAmount"
+                                    checked={basketData.freeAmount}
+                                    onChange={handleChange}
+                                    className="mt-2"
+                                    //   required={!basketData.freeAmount}  // אם freeAmount נבחר, השדה sum לא יהיה חובה
+                                    required={!basketData.sum && !basketData.freeAmount}  // לפחות אחד מהם חייב להיות מלא
+
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+
+                    <Row className="mb-3">
+                        <Col sm={12}>
+                            <Form.Group controlId="imageUpload">
+                                <Form.Label>Upload Image</Form.Label>
+                                <FileUpload
+                                    mode="basic"
+                                    name="image"
+                                    url="/api/upload"
+                                    accept="image/*"
+                                    maxFileSize={1000000}
+                                    onUpload={onUpload}
+                                    chooseLabel="Select Image"
+                                    uploadLabel="Upload"
+                                    cancelLabel="Cancel"
+                                    onSelect={(e) => setImage(e.files[0])}
+                                    className="w-100"
+                                />
+                            </Form.Group>
+                        </Col>
+                    </Row>
+
+                    <Button type="submit" className="w-100 cta-button mt-4">Submit</Button>
+                </form>
+            </div>
+        </div>
+    );
+}

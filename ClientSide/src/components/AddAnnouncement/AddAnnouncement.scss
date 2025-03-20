@@ -1,0 +1,48 @@
+/* AddAnnouncement.scss */
+.AddAnnouncement {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .announcement-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .form-group label {
+    font-weight: bold;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+  }
+  
+  .cta-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #66a499;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    background-color: #557a6b;
+  }
+  

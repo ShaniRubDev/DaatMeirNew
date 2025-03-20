@@ -6,12 +6,14 @@ import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import { Toast } from "primereact/toast";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.scss";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const toast = useRef(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,6 +30,8 @@ const Login = () => {
         detail: response.data.message,
         life: 3000,
       });
+
+      navigate("/manage-area");
     } catch (error) {
       toast.current.show({
         severity: "error",

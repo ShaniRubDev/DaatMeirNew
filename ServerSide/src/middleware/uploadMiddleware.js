@@ -1,9 +1,12 @@
 const multer = require('multer');
 const path = require('path');
 
+
+// בודק אם התיקייה קיימת, ואם לא, יוצר אותה
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'uploads/'); // תיקייה בה התמונות יישמרו
+        cb(null, 'src/uploads/'); // תיקייה בה התמונות יישמרו
     },
     filename: (req, file, cb) => {
         const title = req.body.title;  // משתמשים ב-title מה-body של הבקשה
@@ -14,8 +17,9 @@ const storage = multer.diskStorage({
         // אם יש title, משתמשים בו כדי ליצור שם קובץ
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
         const fileName = title.replace(/\s+/g, '-').toLowerCase() + '-' + uniqueSuffix + path.extname(file.originalname);
-        
+
         cb(null, fileName);  // שומר את הקובץ עם שם המבוסס על ה-title
+
     }
 });
 

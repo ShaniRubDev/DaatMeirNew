@@ -1,16 +1,10 @@
 const express = require('express');
 const fs = require('fs')
 const path = require('path')
-// const conf = require('./config/config')
 const cors = require('cors');
-// const logEvents = require('./loger');
-// const events = require('events');
-// const eventEmitter = new events.EventEmitter();
 const basketRoute = require('./routers/basketRoute')
-// const verifyJWT = require('./middelware/verifyJWT')
 const app = express();
 const session = require('express-session');
-// const { loger } = require('./middelware/logs')
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const {generateToken} = require('./auth');
@@ -21,7 +15,13 @@ const bcrypt = require('bcryptjs');
 
 const publicPath = path.join(__dirname, 'public');
 const dotenv = require('dotenv');
-dotenv.config();
+dotenv.config();const uploadDir = path.join(__dirname, 'uploads');
+const announcementRoutes = require('./routers/announcementRoute');
+
+
+// הדפס את הנתיב על מנת לוודא שהוא נכון
+console.log("Uploads folder path:", uploadDir);
+
 app.use(cors()); // Add this line
 app.use(express.static(publicPath));
 app.use(cookieParser());
@@ -91,10 +91,14 @@ app.post('/register', async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 });
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir);
+}
 
-
-app.use('/api', basketRoute)
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/announcements', announcementRoutes);
+app.use('/basket', basketRoute)
 app.listen(5000, () => {
-    console.log(`app is listenning on port http://localhost:5000`)
+    console.log(`app is listenning on port http://localhost:5001`)
 })
 

@@ -1,56 +1,78 @@
-navbar {
-    font-size: 1.1rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+// navbar {
+//     font-size: 1.1rem;
+//     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+//   }
+//   // .navbar-logo {
+//   //   height: 40px;  /* גובה הלוגו */
+//   //   margin-right: 10px;  /* רווח בין הלוגו לשם */
+//   //   object-fit: contain;  /* לוודא שהתמונה תתאים בגדול שלה מבלי להתעקם */
+//   // }
+  
+//   .cartIcon {
+//     font-size: 1.3rem;
+//     margin-left: 15px;
+//     color: #333;
+  
+//     &:hover {
+//       color: #d97706;
+//     }
+//   }
+  
+//   .container {
+//     text-align: center;
+//     padding: 40px 20px;
+//     background: #f9f9f9;
+//   }
+  
+//   .title {
+//     font-size: 2.5rem;
+//     font-weight: bold;
+//     color: #004aad;
+//   }
+  
+//   .subtitle {
+//     font-size: 1.2rem;
+//     margin-bottom: 20px;
+//     color: #555;
+//   }
+  
+//   .section {
+//     margin-top: 20px;
+//   }
+  
+//   .list {
+//     list-style: none;
+//     padding: 0;
+//     font-size: 1.2rem;
+  
+//     li {
+//       margin: 10px 0;
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       gap: 10px;
+//     }
+//   }
+  
+
+.navbar {
+  font-size: 1.1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: rgba(225,211,182,255)
+}
+
+.cart-icon {
+  font-size: 1.3rem;
+  margin-left: 15px;
+  color:  #ec1b1b;
+
+  &:hover {
+    color: #d97706;
   }
-  // .navbar-logo {
-  //   height: 40px;  /* גובה הלוגו */
-  //   margin-right: 10px;  /* רווח בין הלוגו לשם */
-  //   object-fit: contain;  /* לוודא שהתמונה תתאים בגדול שלה מבלי להתעקם */
-  // }
-  
-  .cartIcon {
-    font-size: 1.3rem;
-    margin-left: 15px;
-    color: #333;
-  
-    &:hover {
-      color: #d97706;
-    }
-  }
-  
-  .container {
-    text-align: center;
-    padding: 40px 20px;
-    background: #f9f9f9;
-  }
-  
-  .title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #004aad;
-  }
-  
-  .subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    color: #555;
-  }
-  
-  .section {
-    margin-top: 20px;
-  }
-  
-  .list {
-    list-style: none;
-    padding: 0;
-    font-size: 1.2rem;
-  
-    li {
-      margin: 10px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-  }
-  
+}
+
+// .container {
+//   text-align: center;
+//   padding: 40px 20px;
+//   background-color: rgba(225,211,182,255);
+// }
