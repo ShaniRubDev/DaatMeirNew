@@ -172,102 +172,104 @@
 
 
 
-.About{
-  .About {
-    background-color: #f8f8f8;
-    font-family: "Arimo";
-  }
-  
-  .about-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 60px 20px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .about-content {
-    text-align: center;
-  }
-  
-  #about-title {
-    font-size: 3rem;
-    font-weight: bold;
-    color: #2c3e50;
-    margin-bottom: 20px;
-    position: relative;
-    display: inline-block;
-  }
-  
-  .about-title::after {
-    content: "";
-    display: block;
-    width: 80px;
-    height: 4px;
-    background: #004aad;
-    margin: 10px auto 0;
-    border-radius: 2px;
-  }
-  
-  .about-subtitle {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #34495e;
-    margin-top: 40px;
-    position: relative;
-    padding-bottom: 10px;
-  }
-  
-  .about-subtitle::after {
-    content: "";
-    display: block;
-    width: 50px;
-    height: 3px;
-    background: #004aad;
-    margin: 8px auto 0;
-    border-radius: 2px;
-  }
-  
-  .about-text {
-    font-size: 1.2rem;
-    line-height: 2;
-    color: #555;
-    text-align: justify;
-    padding: 0 15px;
-    font-weight: 400;
-  }
-  
-  .about-text strong {
-    color: #2c3e50;
-    font-weight: 600;
-  }
-  
-  .donation-box {
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .donation-button {
-    background: linear-gradient(135deg, #004aad 0%, #003580 100%);
-    color: white;
-    font-size: 1.3rem;
-    padding: 14px 35px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s;
-    font-weight: bold;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  
-    &:hover {
-      background: linear-gradient(135deg, #003580 0%, #002d6d 100%);
-      transform: translateY(-3px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  .About{
+    .About {
+      background-color: hsl(0, 0%, 97%);
+      font-family: "Arimo";
+      text-align: right;
     }
+    
+    .about-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 20px;
+      background: white;
+      
+      // border-radius: 12px;
+      // box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    // .about-content {
+    //   text-align: lef;
+    // }
+    
+    #about-title {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #2c3e50;
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .about-title::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: #004aad;
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+    
+    .about-subtitle {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #34495e;
+      margin-top: 40px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .about-subtitle::after {
+      content: "";
+      display: block;
+      width: 50px;
+      height: 3px;
+      background: #004aad;
+      margin: 8px auto 0;
+      border-radius: 2px;
+    }
+    
+    .about-text {
+      font-size: 1.2rem;
+      line-height: 2;
+      color: #555;
+      text-align: justify;
+      padding: 0 15px;
+      font-weight: 400;
+    }
+    
+    .about-text strong {
+      color: #2c3e50;
+      font-weight: 600;
+    }
+    
+    .donation-box {
+      margin-top: 50px;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .donation-button {
+      background: linear-gradient(135deg, #004aad 0%, #003580 100%);
+      color: white;
+      font-size: 1.3rem;
+      padding: 14px 35px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: bold;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    
+      &:hover {
+        background: linear-gradient(135deg, #003580 0%, #002d6d 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+    }
+    
+    
   }
-  
-  
-}

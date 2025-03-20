@@ -124,7 +124,7 @@ const NavBar: FC = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#about">קצת עלינו</Nav.Link>
+              <Nav.Link onClick={()=>navigate("/About")}>קצת עלינו</Nav.Link>
               <Nav.Link onClick={() => navigate("/donation")}>אופציות לתרומה</Nav.Link>
             </Nav>
             <Nav>

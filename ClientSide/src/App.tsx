@@ -17,6 +17,10 @@ import DonationCart from './components/DonationCart/DonationCart';
 import { store, persistor } from '../src/redux/store'; // ייבוא נכון של ה-store וה-persistor
 import AddBasket from './components/AddBasket/AddBasket'; // ייבוא הקומפוננטה החדשה
 import DeleteBasket from './components/DeleteBasket/DeleteBasket';
+import Layout from './components/Layout/Layout';
+import Home from './components/Home/Home';
+import ManageArea from './components/ManageArea/ManageArea';
+import AddAnnouncement from './components/AddAnnouncement/AddAnnouncement';
 
 
 
@@ -42,15 +46,21 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <div className="App">
+        <div className="App" dir="rtl" lang="he">
           <Router>
             <Routes>
-              <Route path='/' element={<About />}></Route>
-              <Route path="/donation" element={<DonationPage />} />
-              <Route path="/donationCart" element={<DonationCart setCartVisible={setCartVisible} />} />
-              <Route path="/add-basket" element={<AddBasket />} /> {/* נתיב חדש */}
-              <Route path="/manage-basket" element={<DeleteBasket/>} /> {/* נתיב חדש */}
+              <Route path="/" element={<Layout />}>
+                <Route path='/About' element={<About />}></Route>
+                <Route path='/' element={<Home/>}></Route>
+                <Route path="/donation" element={<DonationPage />} />
+                <Route path="/donationCart" element={<DonationCart setCartVisible={setCartVisible} />} />
+                <Route path="/add-basket" element={<AddBasket />} /> {/* נתיב חדש */}
+                <Route path="/manage-basket" element={<DeleteBasket />} /> {/* נתיב חדש */}
+                <Route path="/manage-area" element={<ManageArea />} />
+                <Route path="/add-masage" element={<AddAnnouncement/>} />
 
+
+              </Route>
             </Routes>
           </Router>
         </div>

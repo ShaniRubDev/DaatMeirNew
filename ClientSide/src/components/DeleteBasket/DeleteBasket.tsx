@@ -18,13 +18,17 @@ import { Toast } from "primereact/toast";
 import NavBar from "../NavBar/NavBar";
 import { getDonationOptions, deleteBasket } from "../../services/basketService";
 import { DonationOption } from "../../models/DonationOption";
-
+import * as Icon from 'react-bootstrap-icons';
+import { useNavigate } from "react-router-dom";
 
 const DeleteBasket = () => {
   // const [donationOptions, setDonationOptions] = useState([]);
   const [donationOptions, setDonationOptions] = useState<DonationOption[]>([]);
+  const navigate = useNavigate();
 
-  const toast = useRef(null);
+
+  const toast = useRef<Toast>(null);
+
 
   useEffect(() => {
     const fetchDonationOptions = async () => {
@@ -39,17 +43,17 @@ const DeleteBasket = () => {
     fetchDonationOptions();
   }, []);
 
-  const handleDelete = async (id:number) => {
+  const handleDelete = async (id: number) => {
     try {
       console.log(`the selected basket ${id}`)
       await deleteBasket(id);
       setDonationOptions((prev) => prev.filter((item) => item.id !== id));
-      // toast.current?.show({
-      //   severity: "success",
-      //   summary: "נמחק בהצלחה",
-      //   detail: "הסל נמחק מהרשימה",
-      //   life: 3000,
-      // });
+      toast.current?.show({
+        severity: "success",
+        summary: "נמחק בהצלחה",
+        detail: "הסל נמחק מהרשימה",
+        life: 3000,
+      });
     } catch (error) {
       console.error("Error deleting basket:", error);
       // toast.current?.show({
@@ -63,7 +67,6 @@ const DeleteBasket = () => {
 
   return (
     <div className="DeleteBasket">
-      <NavBar />
       <div className="donation-page">
         <h1 className="title">ניהול סלי צדקה</h1>
         <Toast ref={toast} position="top-right" />
@@ -86,7 +89,12 @@ const DeleteBasket = () => {
             </Card>
           ))}
         </div>
+
       </div>
+      {/* <Icon. size={50} color='black' className='m-t5'></Icon.Cart3> */}
+      <button className="add-basket-btn" onClick={() => navigate("/add-basket")}>
+    <i className="bi bi-plus-lg"></i>
+  </button>
     </div>
   );
 };

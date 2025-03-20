@@ -55,4 +55,4 @@ async function deleteBasketFromDB(id) {
     }
 }
 
-module.exports = { getAllBaskets,uploadImageToDB,saveBasket ,deleteBasketFromDB };
+module.exports = { getAllBaskets,uploadImageToDB,saveBasket,deleteBasketFromDB};

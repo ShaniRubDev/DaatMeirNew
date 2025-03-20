@@ -149,7 +149,6 @@ const DonationPage: FC<DonationPageProps> = () => {
 
   return (
     <div className="DonationPage">
-      <NavBar></NavBar>
       <div className="donation-page">
         <h1 className="title">סלי צדקה - ברכה עבורכם</h1>
         <Link to="/add-basket">
@@ -164,16 +163,16 @@ const DonationPage: FC<DonationPageProps> = () => {
             <Card
               key={index}
               title={option.title}
-              subTitle={option.sum}
+              subTitle={option.sum ==0 ?null:`${option.sum} ₪`}
               header={
                 <img alt={option.title} src={`http://localhost:5000${option.image}`} className="donation-image" />
               }
               className="donation-card"
             >
               <p className="donation-description">{option.description}</p>
-              {option.freeAmount ? (
+              {option.sum ==0 ? (
                 <div className="flex-auto">
-                  <label htmlFor={`customAmount-${index}`} className="font-bold block mb-2">
+                  <label htmlFor={`customAmount-${index}`} className="font-bold block mb-7">
                     בחר סכום חודשי:
                   </label>
                   <InputNumber
@@ -182,14 +181,14 @@ const DonationPage: FC<DonationPageProps> = () => {
                     useGrouping={false}
                     onValueChange={(e) => handleAmountChange(index, e.value ?? 0)}
                     placeholder="סכום חודשי"
-                    className="w-full mt-2"
+                    className="w-full mt-6"
                   />
                 </div>
               ) : null}
               <Button
                 label="אני רוצה לתרום"
                 onClick={() => handleAddToCart(option, index)}
-                className="donate-button"
+                className="donate-button m-2"
               />
             </Card>
           ))}
