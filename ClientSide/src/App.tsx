@@ -16,8 +16,8 @@ import DonationPage from './components/DonationPage/DonationPage';
 import DonationCart from './components/DonationCart/DonationCart';
 import { store, persistor } from '../src/redux/store'; // ייבוא נכון של ה-store וה-persistor
 import AddBasket from './components/AddBasket/AddBasket'; // ייבוא הקומפוננטה החדשה
-
-
+import Register from './components/Register/Register';
+import Login from './components/Login/Login';
 
 // const persistConfig = {
 //   key: 'root',
@@ -47,6 +47,8 @@ function App() {
               <Route path="/donation" element={<DonationPage />} />
               <Route path="/donationCart" element={<DonationCart setCartVisible={setCartVisible} />} />
               <Route path="/add-basket" element={<AddBasket />} /> {/* נתיב חדש */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} /> 
             </Routes>
           </Router>
         </div>

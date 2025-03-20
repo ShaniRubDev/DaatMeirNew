@@ -8,7 +8,7 @@ const { uploadImageToBasket} = require('../controllers/basketControllers');
 // console.log("basketControllers:", basketControllers);
 
 basketRoute.get('/getBasket',getListBsket)
-basketRoute.post('/upload',upload,uploadImageToBasket); 
+// basketRoute.post('/upload',upload,uploadImageToBasket); 
 
 basketRoute.post('/add', addBasket);
 // basketRoute.post('/add', async (req, res) => {
