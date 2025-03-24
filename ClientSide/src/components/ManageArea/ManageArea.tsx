@@ -28,7 +28,7 @@ const ManageArea: FC<ManageAreaProps> = () => {
           </button>
         </div>
         <div className="option">
-          <button onClick={() => navigate('/manage-basket')} className="cta-button">
+          <button onClick={() => navigate('/add-masage')} className="cta-button">
             ניהול ההודעות
           </button>
         </div>
