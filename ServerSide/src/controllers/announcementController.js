@@ -1,5 +1,7 @@
 // import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 const { format } = require('date-fns');
+const { get_query, create_query } = require('../db');
+
 
 
 const {
@@ -34,35 +36,68 @@ const formatDate = (date) => {
 //         res.status(500).json({ message: "❌ שגיאה ביצירת מודעה" });
 //     }
 // }
+// async function create(req, res) {
+//     try {
+//         const { title, content, startDate, endDate, isActive } = req.body;
+
+//         const formattedStartDate = formatDate(startDate);
+//         const formattedEndDate = formatDate(endDate);
+//         const activeStatus = isActive ? 1 : 0; // הפיכת isActive לערך מספרי
+
+//         console.log("📌 INSERT INTO DB:", {
+//             title,
+//             content,
+//             formattedStartDate,
+//             formattedEndDate,
+//             isActive: activeStatus
+//         });
+//         console.log("🔍 typeof title:", typeof title);
+//         console.log("🔍 typeof content:", typeof content);
+//         console.log("🔍 typeof formattedStartDate:", typeof formattedStartDate);
+//         console.log("🔍 typeof formattedEndDate:", typeof formattedEndDate);
+//         console.log("🔍 typeof isActive:", typeof activeStatus);
+
+//         const newAnnouncement = await createAnnouncement(title, content, formattedStartDate, formattedEndDate, activeStatus);
+
+//         res.status(201).json({ message: "✅ המודעה נוספה בהצלחה!", newAnnouncement });
+//     } catch (error) {
+//         console.error("❌ שגיאה ביצירת מודעה:", error);
+//         console.log('Error code:', error.code);
+//         console.log('SQL:', error.sql);
+//         console.log('SQL state:', error.sqlState);
+//         console.log('Full error object:', error);
+//         res.status(500).json({ message: "❌ שגיאה ביצירת מודעה" });
+//     }
+// }
 async function create(req, res) {
     try {
+        // קבלת נתונים מהבקשה
         const { title, content, startDate, endDate, isActive } = req.body;
 
+        // המרת תאריכים לפורמט הנדרש
         const formattedStartDate = formatDate(startDate);
         const formattedEndDate = formatDate(endDate);
         const activeStatus = isActive ? 1 : 0; // הפיכת isActive לערך מספרי
 
-        console.log("📌 INSERT INTO DB:", {
-            title,
-            content,
-            formattedStartDate,
-            formattedEndDate,
-            isActive: activeStatus
-        });
-        console.log("🔍 typeof title:", typeof title);
-        console.log("🔍 typeof content:", typeof content);
-        console.log("🔍 typeof formattedStartDate:", typeof formattedStartDate);
-        console.log("🔍 typeof formattedEndDate:", typeof formattedEndDate);
-        console.log("🔍 typeof isActive:", typeof activeStatus);
+        // שאילתת SQL
+        const query_to_announce = `
+            INSERT INTO announcements (title, content, startDate, endDate, isActive) 
+            VALUES (?, ?, ?, ?, ?)
+        `;
+        const params = [title, content, formattedStartDate, formattedEndDate, activeStatus];
 
-        const newAnnouncement = await createAnnouncement(title, content, formattedStartDate, formattedEndDate, activeStatus);
+        // שליחת השאילתה עם הפרמטרים המתאימים
+        const result = await get_query(query_to_announce, params);
 
-        res.status(201).json({ message: "✅ המודעה נוספה בהצלחה!", newAnnouncement });
+        // החזרת תשובה מוצלחת
+        res.status(201).json({ message: "✅ המודעה נוספה בהצלחה!", result });
     } catch (error) {
-        console.error("❌ שגיאה ביצירת מודעה:", error);
-        res.status(500).json({ message: "❌ שגיאה ביצירת מודעה" });
+        // טיפול בשגיאה
+        console.log(`the error is: ${error}`);
+        res.status(500).json({ message: "❌ שגיאה ביצירת מודעה", error: error.message });
     }
 }
+
 
 async function getActive(req, res) {
     try {

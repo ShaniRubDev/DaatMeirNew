@@ -16,7 +16,8 @@ const pool = mysql.createPool({
     user: 'root',
     password: 'mysql24',
     port: '3306',
-    database: 'daatmeir'
+    database: 'daatmeir',
+    charset: 'utf8mb4'
 }).promise();
 module.exports = pool
 
@@ -55,8 +56,8 @@ async function get_query(query, params = null) {
 
 async function exampleUse() {
     try {
-        const query_to_user_id = `select user_id from users where email = ? `
-        const params = ['Nn05@gmail.com'];
+        const query_to_user_id = `INSERT INTO announcements (title,content, startDate, endDate, isActive) VALUES (?,?, ?, ?, ?) `
+        const params = ['גג', 'גג', '2025-03-20', '2025-03-27', 1];
         const result = await get_query(query_to_user_id, params);
     }
     catch (error) {
@@ -87,15 +88,31 @@ async function createTables() {
             freeAmount TINYINT(1) DEFAULT 1
         );`;
 
+        const createDonorTable =` CREATE TABLE IF NOT EXISTS donors (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            first_name VARCHAR(255) NOT NULL,
+            last_name VARCHAR(255) NOT NULL,
+            phone VARCHAR(15),
+            email VARCHAR(255) NOT NULL,
+            address TEXT,
+            createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        `
+
 
         await pool.execute(createAnnouncementsTable);
         await pool.execute(createBasketsTable);
+        await pool.execute(createDonorTable);
 
-        console.log("✅ Table 'announcements' is ready");
+
+        // console.log("✅ Table 'announcements' is ready");
+        
+        console.log("✅ Tables 'announcements', 'baskets', 'donors' and 'donations' are ready.");
     } catch (error) {
         console.error("❌ Error creating tables:", error);
     }
 }
+exampleUse();
 // pool.getConnection()
 //     .then(connection => {
 //         console.log("Connected to MySQL!");
@@ -109,6 +126,8 @@ pool.getConnection()
         console.log("Connected to MySQL!");
         connection.release();
         await createTables(); // יצירת טבלאות אם הן לא קיימות
+        exampleUse();
+
     })
     .catch(error => {
         console.error("Failed to connect to MySQL:", error);

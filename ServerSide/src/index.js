@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 const publicPath = path.join(__dirname, 'public');
 const uploadDir = path.join(__dirname, 'uploads');
 const announcementRoutes = require('./routers/announcementRoute');
+const donorRoute = require('./routers/donorRouters')
 
 
 // הדפס את הנתיב על מנת לוודא שהוא נכון
@@ -33,7 +34,8 @@ if (!fs.existsSync(uploadDir)) {
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/announcements', announcementRoutes);
-app.use('/basket', basketRoute)
+app.use('/basket', basketRoute);
+app.use('/donor',donorRoute);
 app.listen(5000, () => {
     console.log(`app is listenning on port http://localhost:5001`)
 })
