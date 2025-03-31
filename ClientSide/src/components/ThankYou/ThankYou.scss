@@ -1,0 +1,86 @@
+@import "../Home/Home.scss"; // משתמשים בצבעים ובעיצובים של עמוד הבית
+
+.thank-you {
+  color: $text-color;
+
+  .hero-background {
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
+    opacity: 40%;
+  }
+
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2;
+
+    h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      color: $blue-color;
+      font-family: "Poppins", sans-serif;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      font-family: "Roboto", sans-serif;
+    }
+  }
+
+  .about {
+    background-color: rgba(70, 148, 134, 0.4);
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+
+    .about-container {
+      max-width: 800px;
+      text-align: center;
+
+      .about-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: $secondary-color;
+        margin-bottom: 20px;
+
+        &::after {
+          content: "";
+          display: block;
+          width: 100px;
+          height: 4px;
+          background: $secondary-color;
+          margin: 10px auto 0;
+          border-radius: 2px;
+        }
+      }
+
+      .about-description {
+        font-size: 1.5rem;
+        color: #f8f8f8;
+        margin-bottom: 30px;
+      }
+
+      .about-text {
+        font-size: 1.2rem;
+        color: #f8f8f8;
+        line-height: 1.8;
+      }
+    }
+  }
+
+  .call-to-action {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+  }
+}

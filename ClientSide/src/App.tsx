@@ -21,6 +21,8 @@ import Layout from './components/Layout/Layout';
 import Home from './components/Home/Home';
 import ManageArea from './components/ManageArea/ManageArea';
 import AddAnnouncement from './components/AddAnnouncement/AddAnnouncement';
+import ThankYou from './components/ThankYou/ThankYou';
+import PersonalDetailsForm from './components/PersonalDetailsForm/PersonalDetailsForm';
 // import PersonalDetailsForm from './components/PersonalDetailsForm/PersonalDetailsForm';
 
 
@@ -59,8 +61,8 @@ function App() {
                 <Route path="/manage-basket" element={<DeleteBasket />} /> {/* נתיב חדש */}
                 <Route path="/manage-area" element={<ManageArea />} />
                 <Route path="/add-masage" element={<AddAnnouncement/>} />
-                {/* <Route path="/fill-Personal-DetailsForm" element={<PersonalDetailsForm/>} /> */}
-
+                <Route path = "/thenks" element={<ThankYou/>}></Route>
+                <Route path="/payment" element={<PersonalDetailsForm  />} />
 
 
 

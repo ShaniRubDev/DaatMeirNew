@@ -1,14 +1,14 @@
 .PersonalDetailsForm {
 
     /* כללי */
-.container {
-    max-width: 600px;
-    margin: auto;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-  }
+// .container {
+//     max-width: 600px;
+//     margin: auto;
+//     // padding: 40px;
+//     // border-radius: 15px;
+//     // box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+//     // background-color: #f9f9f9;
+//   }
   
   h2 {
     text-align: center;
@@ -57,14 +57,14 @@
   }
   
   /* iframe */
-  iframe {
-    width: 100%;
-    height: 450px;
-    border: none;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-  }
+//   iframe {
+//     width: 100%;
+//     height: 450px;
+//     border: none;
+//     border-radius: 10px;
+//     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+//     margin-top: 20px;
+//   }
   
   /* אזור כפתור תשלום */
   .button-container {

@@ -1,173 +1,55 @@
-// import React, { useState, useEffect } from "react";
+
+// import React, { useState, useEffect, useRef } from "react";
 // import { InputText } from "primereact/inputtext";
 // import { Button } from "primereact/button";
 // import { InputMask } from "primereact/inputmask";
+// import { Message } from "primereact/message";
+// import { useNavigate, useLocation } from 'react-router-dom';
+
 // import axios from "axios";
 
-// const PersonalDetailsForm = () => {
+// const PersonalDetailsForm: React.FC = () => {
+//   const location = useLocation();
+//   const amount = location.state?.amount || 0; // אם אין סכום, ברירת המחדל תהיה 0
+
 //   const [firstName, setFirstName] = useState("");
 //   const [lastName, setLastName] = useState("");
 //   const [phone, setPhone] = useState("");
 //   const [email, setEmail] = useState("");
 //   const [address, setAddress] = useState("");
-//   const [amount, setAmount] = useState("");
-//   const [paymentType, setPaymentType] = useState("Ragil"); // ברירת מחדל לתשלום רגיל
-//   const [tashlumim, setTashlumim] = useState(""); // מספר חודשים עבור הוראת קבע
+//   const [paymentType, setPaymentType] = useState<"Ragil" | "HK">("Ragil");
+//   const [months, setMonths] = useState<string>("");
+//   const [message, setMessage] = useState<{ severity: "success" | "error"; text: string } | null>(null);
+//   const iframeRef = useRef<any>();
+//   const navigate = useNavigate();
+//   const [showComponent, setShowComponent] = useState(true);
 
 //   useEffect(() => {
-//     const formElements = document.querySelectorAll("input");
-//     formElements.forEach((element) => {
-//       switch (element.name) {
-//         case "firstName":
-//           setFirstName(element.value);
-//           break;
-//         case "lastName":
-//           setLastName(element.value);
-//           break;
-//         case "phone":
-//           setPhone(element.value);
-//           break;
-//         case "email":
-//           setEmail(element.value);
-//           break;
-//         case "address":
-//           setAddress(element.value);
-//           break;
-//         default:
-//           break;
+//     const messageListener = (event: MessageEvent) => {
+//       if (event.origin.includes("matara.pro")) {
+//         console.log("Message from iframe:", event.data);
+//         if (event.data?.Name === "Heightss") {
+//           iframeRef.current.style.height = `${parseInt(event.data.Value) + 15}px`;
+//         }
+//         if (event.data.Value?.Status === 'OK') {
+//           window.location.href = "/thenks";
+//           setTimeout(() => {
+//             setShowComponent(false);
+//             navigate("/thenks");
+//           }, 1000);
+//         }
+//         else if (event.data.Value?.Status === "Error") {
+//           setMessage({ severity: "error", text: "שגיאה בביצוע התשלום. נסה שוב מאוחר יותר." });
+//         }
+//         // setTimeout(() => setMessage(null), 1000); // מעלים את ההודעה אחרי 5 שניות
+//         setTimeout(() => setMessage(null), 10000); // מעלים את ההודעה אחרי 10 שניות
+
 //       }
-//     });
+//     };
+
+//     window.addEventListener("message", messageListener);
+//     return () => window.removeEventListener("message", messageListener);
 //   }, []);
-
-//   const handleSubmit = async () => {
-//     try {
-//       const response = await axios.post("http://localhost:5000/donor/save-donor", {
-//         firstName,
-//         lastName,
-//         phone,
-//         email,
-//         address,
-//       });
-//       console.log("Donor saved:", response.data);
-//     } catch (error) {
-//       console.error("Error saving donor:", error);
-//     }
-//   };
-
-//   const handlePayment = ()  => {
-
-//     const iframe = document.getElementById("NedarimFrame") as HTMLIFrameElement;
-//     if (iframe && iframe.contentWindow) {
-//       iframe.contentWindow.postMessage(
-//         {
-//           Name: "FinishTransaction2",
-//           Value: {
-//             Mosad: "7014113",
-//             ApiValid: "5tezOx+JDY",
-//             Zeout: "", // מספר תעודת זהות (להוסיף אם רלוונטי)
-//             PaymentType: paymentType,
-//             Currency: "1",
-//             FirstName: firstName,
-//             LastName: lastName,
-//             Street: address,
-//             City: "", // אפשר להוסיף עיר אם רוצים
-//             Phone: phone,
-//             Mail: email,
-//             Amount: amount,
-//             Tashlumim: paymentType === "HK" ? tashlumim || "" : "1", // מספר חודשים להוראת קבע או תשלום רגיל
-//             Comment: "תשלום דרך האתר",
-//             Groupe: "", // אפשר להוסיף קטגוריה אם יש צורך
-//             Param1: "", // נתון חופשי לקאלבק
-//             Param2: "", // נתון חופשי לקאלבק
-//             CallBack: "https://scrolls-website.onrender.com/paymentApi/payment-callback", // כתובת לקבלת תגובה בסיום תשלום
-//             CallBackMailError: "s0556737348@gmail.com", // מייל לקבלת שגיאות
-
-//           },
-//         },
-//         "*"
-//       );
-//     } else {
-//       console.error("Iframe not found or contentWindow is unavailable.");
-//     }
-//   };
-
-//   return (
-//     <div style={{ maxWidth: "500px", margin: "auto", padding: "20px", borderRadius: "10px", boxShadow: "0 0 10px rgba(0,0,0,0.1)", backgroundColor: "#fff" }}>
-//       <h2 style={{ textAlign: "center", marginBottom: "20px" }}>מלא את פרטיך האישיים</h2>
-//       <div className="p-fluid">
-//         <label>שם פרטי:</label>
-//         <InputText name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="p-inputtext" />
-//       </div>
-//       <div className="p-fluid">
-//         <label>שם משפחה:</label>
-//         <InputText name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} className="p-inputtext" />
-//       </div>
-//       <div className="p-fluid">
-//         <label>טלפון:</label>
-//         <InputMask name="phone" mask="(999) 999-9999" value={phone} onChange={(e) => setPhone(e.value || "")} className="p-inputtext" />
-//       </div>
-//       <div className="p-fluid">
-//         <label>אימייל:</label>
-//         <InputText name="email" value={email} onChange={(e) => setEmail(e.target.value)} className="p-inputtext" />
-//       </div>
-//       <div className="p-fluid">
-//         <label>כתובת מגורים:</label>
-//         <InputText name="address" value={address} onChange={(e) => setAddress(e.target.value)} className="p-inputtext" />
-//       </div>
-//       <div className="p-fluid">
-//         <label>סכום תרומה:</label>
-//         <InputText value={amount} onChange={(e) => setAmount(e.target.value)} className="p-inputtext" />
-//       </div>
-//       <div className="p-fluid">
-//         <label>סוג תשלום:</label>
-//         <select value={paymentType} onChange={(e) => setPaymentType(e.target.value)} className="p-inputtext">
-//           <option value="Ragil">תשלום רגיל</option>
-//           <option value="HK">הוראת קבע</option>
-//         </select>
-//       </div>
-
-//       {paymentType === "HK" && (
-//         <div className="p-fluid">
-//           <label>מספר חודשים (ריק = ללא הגבלה):</label>
-//           <InputText value={tashlumim} onChange={(e) => setTashlumim(e.target.value)} className="p-inputtext" type="number" min="1" />
-//         </div>
-//       )}
-
-//       <div style={{ display: "flex", justifyContent: "space-between", marginTop: "20px" }}>
-//         <Button label="שמירה" onClick={handleSubmit} className="p-button-primary" />
-//         <Button label="לביצוע תשלום" onClick={handlePayment} className="p-button-success" />
-//       </div>
-
-//       <iframe
-//         id="NedarimFrame"
-//         style={{ width: "100%", height: "500px", border: "1px solid #ccc", marginTop: "20px", borderRadius: "5px" }}
-//         src="https://matara.pro/nedarimplus/iframe?language=he"
-//       ></iframe>
-//     </div>
-//   );
-// };
-
-// export default PersonalDetailsForm;
-// export{}
-
-
-
-// import React, { useState } from "react";
-// import { InputText } from "primereact/inputtext";
-// import { Button } from "primereact/button";
-// import { InputMask } from "primereact/inputmask";
-// import axios from "axios";
-
-// interface PersonalDetailsFormProps {
-//   amount: number;
-// }
-
-// const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = ({ amount }) => {
-//   const [firstName, setFirstName] = useState("");
-//   const [lastName, setLastName] = useState("");
-//   const [phone, setPhone] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [address, setAddress] = useState("");
 
 //   const handleSubmit = async () => {
 //     try {
@@ -192,10 +74,10 @@
 //         {
 //           Name: "FinishTransaction2",
 //           Value: {
-//             Mosad: "7014113",
-//             ApiValid: "5tezOx+JDY",
+//             Mosad: "7013230",
+//             ApiValid: "A1iMKiIXRo",
 //             Zeout: "",
-//             PaymentType: "Ragil", // סוג תשלום רגיל
+//             PaymentType: paymentType,
 //             Currency: "1",
 //             FirstName: firstName,
 //             LastName: lastName,
@@ -204,7 +86,7 @@
 //             Phone: phone,
 //             Mail: email,
 //             Amount: amount,
-//             Tashlumim: "1",
+//             Tashlumim: paymentType === "HK" && months ? months : "1",
 //             Comment: "תרומה דרך האתר",
 //             Groupe: "",
 //             Param1: "",
@@ -220,38 +102,78 @@
 //     }
 //   };
 
+//   if (!showComponent) return null;
+
 //   return (
-//     <div style={{ maxWidth: "500px", margin: "auto", padding: "20px", borderRadius: "10px", boxShadow: "0 0 10px rgba(0,0,0,0.1)", backgroundColor: "#fff" }}>
-//       <h2 style={{ textAlign: "center", marginBottom: "20px" }}>מלא את פרטיך האישיים</h2>
-//       <div className="p-fluid">
-//         <label>שם פרטי:</label>
-//         <InputText name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="p-inputtext" />
+//     <div style={{ maxWidth: "600px", margin: "auto", padding: "40px", borderRadius: "15px", boxShadow: "0 0 20px rgba(0,0,0,0.1)", backgroundColor: "#f9f9f9" }}>
+//       <h2 style={{ textAlign: "center", color: "#2c3e50", marginBottom: "30px", fontFamily: "Arial, sans-serif", fontWeight: "bold" }}>
+//         מלא את פרטיך האישיים
+//       </h2>
+
+//       {message && (
+//         <Message severity={message.severity} text={message.text} style={{ marginBottom: "20px" }} />
+//       )}
+
+//       <div className="p-fluid" style={{ marginBottom: "20px" }}>
+//         <label style={{ fontSize: "16px", color: "#34495e" }}>שם פרטי:</label>
+//         <InputText value={firstName} onChange={(e) => setFirstName(e.target.value)} style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }} />
 //       </div>
-//       <div className="p-fluid">
-//         <label>שם משפחה:</label>
-//         <InputText name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} className="p-inputtext" />
+
+//       <div className="p-fluid" style={{ marginBottom: "20px" }}>
+//         <label style={{ fontSize: "16px", color: "#34495e" }}>שם משפחה:</label>
+//         <InputText value={lastName} onChange={(e) => setLastName(e.target.value)} style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }} />
 //       </div>
-//       <div className="p-fluid">
-//         <label>טלפון:</label>
-//         <InputMask name="phone" mask="(999) 999-9999" value={phone} onChange={(e) => setPhone(e.value || "")} className="p-inputtext" />
+
+//       <div className="p-fluid" style={{ marginBottom: "20px" }}>
+//         <label style={{ fontSize: "16px", color: "#34495e" }}>טלפון:</label>
+//         <InputMask mask="999999999" value={phone} onChange={(e) => setPhone(e.value || "")} style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }} />
 //       </div>
-//       <div className="p-fluid">
-//         <label>אימייל:</label>
-//         <InputText name="email" value={email} onChange={(e) => setEmail(e.target.value)} className="p-inputtext" />
+
+//       <h3 style={{ textAlign: "center", color: "#2980b9", fontSize: "20px" }}>סכום לתשלום: {amount} ₪</h3>
+
+//       <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
+//         <Button
+//           label="תשלום חד-פעמי"
+//           onClick={() => setPaymentType("Ragil")}
+//           className={paymentType === "Ragil" ? "p-button-primary" : "p-button-outlined"}
+//           style={{ marginRight: "10px" }}
+//         />
+//         <Button
+//           label="הוראת קבע"
+//           onClick={() => setPaymentType("HK")}
+//           className={paymentType === "HK" ? "p-button-primary" : "p-button-outlined"}
+//         />
 //       </div>
-//       <div className="p-fluid">
-//         <label>כתובת מגורים:</label>
-//         <InputText name="address" value={address} onChange={(e) => setAddress(e.target.value)} className="p-inputtext" />
-//       </div>
-//       <h3>סכום לתשלום: {amount} ₪</h3>
+
+//       {paymentType === "HK" && (
+//         <div className="p-fluid" style={{ marginBottom: "20px" }}>
+//           <label style={{ fontSize: "16px", color: "#34495e" }}>מספר חודשים:</label>
+//           <InputText
+//             value={months}
+//             onChange={(e) => setMonths(e.target.value)}
+//             style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }}
+//             type="number"
+//             min="1"
+//             placeholder="הכנס מספר חודשים"
+//           />
+//         </div>
+//       )}
 
 //       <iframe
 //         id="NedarimFrame"
-//         style={{ width: "100%", height: "500px", border: "1px solid #ccc", marginTop: "20px", borderRadius: "5px" }}
+//         style={{
+//           width: "100%",
+//           height: "450px",
+//           border: "none",
+//           borderRadius: "10px",
+//           boxShadow: "0 0 15px rgba(0, 0, 0, 0.1)",
+//           marginTop: "20px",
+//         }}
 //         src="https://matara.pro/nedarimplus/iframe?language=he"
 //       ></iframe>
-//       <div style={{ display: "flex", justifyContent: "space-between", marginTop: "20px" }}>
-//         <Button label="אישור תשלום" onClick={handlePayment} className="p-button-success" />
+
+//       <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
+//         <Button label="אישור תשלום" onClick={handlePayment} className="p-button-success" style={{ padding: "10px 20px", fontSize: "16px", borderRadius: "5px" }} />
 //       </div>
 //     </div>
 //   );
@@ -259,123 +181,284 @@
 
 // export default PersonalDetailsForm;
 
-import React, { useState } from "react";
+
+import React, { useState, useEffect, useRef } from "react";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { InputMask } from "primereact/inputmask";
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
+import { Toast } from 'primereact/toast'; // ייבוא של Toast
+import { saveDonor } from '../../services/donor.service'
 
-interface PersonalDetailsFormProps {
-  amount: number;
-}
 
-const PersonalDetailsForm: React.FC<PersonalDetailsFormProps> = ({ amount }) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
+const PersonalDetailsForm: React.FC = () => {
+    const location = useLocation();
+    const amount = location.state?.amount || 0; // אם אין סכום, ברירת המחדל תהיה 0
 
-  const handleSubmit = async () => {
-    try {
-      const response = await axios.post("http://localhost:5000/donor/save-donor", {
-        firstName,
-        lastName,
-        phone,
-        email,
-        address,
-      });
-      console.log("Donor saved:", response.data);
-    } catch (error) {
-      console.error("Error saving donor:", error);
-    }
-  };
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [address, setAddress] = useState("");
+    const [paymentType, setPaymentType] = useState<"Ragil" | "HK">("Ragil");
+    const [months, setMonths] = useState<string>("");
+    const iframeRef = useRef<any>();
+    const navigate = useNavigate();
+    const [showComponent, setShowComponent] = useState(true);
+    const toast = useRef<Toast>(null); // יצירת רפרנס ל-Toast
+    let donorId
 
-  const handlePayment = () => {
-    handleSubmit();
-    const iframe = document.getElementById("NedarimFrame") as HTMLIFrameElement;
-    if (iframe && iframe.contentWindow) {
-      iframe.contentWindow.postMessage(
-        {
-          Name: "FinishTransaction2",
-          Value: {
-            Mosad: "7014113",
-            ApiValid: "5tezOx+JDY",
-            Zeout: "",
-            PaymentType: "Ragil", // סוג תשלום רגיל
-            Currency: "1",
-            FirstName: firstName,
-            LastName: lastName,
-            Street: address,
-            City: "",
-            Phone: phone,
-            Mail: email,
-            Amount: amount,
-            Tashlumim: "1",
-            Comment: "תרומה דרך האתר",
-            Groupe: "",
-            Param1: "",
-            Param2: "",
-            CallBack: "https://scrolls-website.onrender.com/paymentApi/payment-callback",
-            CallBackMailError: "scrollsSite@gmail.com",
-          },
-        },
-        "*"
-      );
-    } else {
-      console.error("Iframe not found or contentWindow is unavailable.");
-    }
-  };
+    useEffect(() => {
+        const messageListener = (event: MessageEvent) => {
+            if (event.origin.includes("matara.pro")) {
+                console.log("Message from iframe:", event.data);
+                if (event.data?.Name === "Heightss") {
+                    iframeRef.current.style.height = `${parseInt(event.data.Value) + 15}px`;
+                }
+                if (event.data.Value?.Status === 'OK') {
+                    // handleSubmit();
+                    // window.location.href = "/thenks";
+                    // setTimeout(() => {
+                    //     setShowComponent(false);
+                    //     navigate("/thenks");
+                    // }, 1000);
 
-  return (
-    <div style={{ maxWidth: "600px", margin: "auto", padding: "40px", borderRadius: "15px", boxShadow: "0 0 20px rgba(0,0,0,0.1)", backgroundColor: "#f9f9f9" }}>
-      <h2 style={{ textAlign: "center", color: "#2c3e50", marginBottom: "30px", fontFamily: "Arial, sans-serif", fontWeight: "bold" }}>מלא את פרטיך האישיים</h2>
-      
-      <div className="p-fluid" style={{ marginBottom: "20px" }}>
-        <label style={{ fontSize: "16px", color: "#34495e" }}>שם פרטי:</label>
-        <InputText name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} className="p-inputtext p-inputtext-sm" style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }} />
-      </div>
-      
-      <div className="p-fluid" style={{ marginBottom: "20px" }}>
-        <label style={{ fontSize: "16px", color: "#34495e" }}>שם משפחה:</label>
-        <InputText name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} className="p-inputtext p-inputtext-sm" style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }} />
-      </div>
-      
-      <div className="p-fluid" style={{ marginBottom: "20px" }}>
-        <label style={{ fontSize: "16px", color: "#34495e" }}>טלפון:</label>
-        <InputMask name="phone" mask="(999) 999-9999" value={phone} onChange={(e) => setPhone(e.value || "")} className="p-inputtext p-inputtext-sm" style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }} />
-      </div>
-      
-      <div className="p-fluid" style={{ marginBottom: "20px" }}>
-        <label style={{ fontSize: "16px", color: "#34495e" }}>אימייל:</label>
-        <InputText name="email" value={email} onChange={(e) => setEmail(e.target.value)} className="p-inputtext p-inputtext-sm" style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }} />
-      </div>
-      
-      <div className="p-fluid" style={{ marginBottom: "20px" }}>
-        <label style={{ fontSize: "16px", color: "#34495e" }}>כתובת מגורים:</label>
-        <InputText name="address" value={address} onChange={(e) => setAddress(e.target.value)} className="p-inputtext p-inputtext-sm" style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }} />
-      </div>
+                    console.log("Payment successful! Saving donor details...");
+                    if (!firstName || !lastName || !phone || !email || !address) {
+                        console.error("❌ Missing required donor fields!");
+                        toast.current?.show({
+                            severity: "error",
+                            summary: "שגיאה",
+                            detail: "אנא מלא את כל השדות לפני ביצוע התשלום.",
+                            life: 5000,
+                        });
+                        return;
+                    }
+                    // try {
+                    //     const donorData = { firstName, lastName, phone, email, address };
+                    handlePaymentSuccess(); // קריאה לפונקציה אסינכרונית
 
-      <h3 style={{ textAlign: "center", color: "#2980b9", fontSize: "20px", fontFamily: "Arial, sans-serif" }}>סכום לתשלום: {amount} ₪</h3>
+                }
+                else if (event.data.Value?.Status === "Error") {
+                    handlePaymentSuccess(); // קריאה לפונקציה אסינכרונית
+                    if (!firstName || !lastName || !phone || !email || !address) {
+                        console.error("❌ Missing required donor fields!");
+                        toast.current?.show({
+                            severity: "error",
+                            summary: "שגיאה",
+                            detail: "אנא מלא את כל השדות לפני ביצוע התשלום.",
+                            life: 5000,
+                        });
+                        return;
+                    }
 
-      <iframe
-        id="NedarimFrame"
-        style={{
-          width: "100%",
-          height: "450px",
-          border: "none",
-          borderRadius: "10px",
-          boxShadow: "0 0 15px rgba(0, 0, 0, 0.1)",
-          marginTop: "20px",
-        }}
-        src="https://matara.pro/nedarimplus/iframe?language=he"
-      ></iframe>
+                    // הצגת הודעת שגיאה ב-Toast
+                    toast.current?.show({
+                        severity: 'error',
+                        summary: 'שגיאה בתשלום',
+                        detail: 'שגיאה בביצוע התשלום. נסה שו ב',
+                        life: 10000 // הזמן שההודעה תישאר על המסך (במילישניות)
+                    });
 
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
-        <Button label="אישור תשלום" onClick={handlePayment} className="p-button-success" style={{ padding: "10px 20px", fontSize: "16px", borderRadius: "5px" }} />
-      </div>
-    </div>
-  );
+                    //   setTimeout(() => setShowComponent(false), 1000);
+                }
+            }
+        };
+
+        window.addEventListener("message", messageListener);
+        return () => window.removeEventListener("message", messageListener);
+    }, [firstName, lastName, phone, email, address]);
+
+    // const handlePaymentSuccess = async () => {
+    //     try {
+    //         const donorData = { firstName, lastName, phone, email, address };
+    //         const response = await saveDonor(donorData); // קריאה לשרת
+    //         console.log("Donor ID:", response.donor.id);
+
+    //         setTimeout(() => {
+    //             setShowComponent(false);
+    //             navigate("/thenks");
+    //         }, 1000);
+
+    //     } catch (error) {
+    //         console.error("Error saving donor:", error);
+    //     }
+    // };
+
+    const handlePaymentSuccess = async () => {
+        if (!firstName || !lastName || !phone || !email || !address) {
+            console.error("Missing required donor fields!");
+            toast.current?.show({
+                severity: "error",
+                summary: "שגיאה",
+                detail: "אנא מלא את כל השדות לפני ביצוע התשלום.",
+                life: 5000,
+            });
+            return; // לא שולחים בקשה אם יש שדות ריקים
+        }
+
+        try {
+            const donorData = { firstName, lastName, phone, email, address };
+            const response = await saveDonor(donorData);
+            
+            console.log("Donor ID:", response.donor.insertId);
+
+            setTimeout(() => {
+                setShowComponent(false);
+                navigate("/thenks");
+            }, 1000);
+        } catch (error) {
+            console.error("Error saving donor:", error);
+        }
+    };
+
+
+    const handleSubmit = async () => {
+        try {
+            const response = await axios.post("http://localhost:5000/donor/save-donor", {
+                firstName,
+                lastName,
+                phone,
+                email,
+                address,
+            });
+            console.log("Donor saved:", response.data);
+            donorId = response.data.donor.id; // קבלת ה-ID של התורם
+            console.log(donorId);
+
+        } catch (error) {
+            console.error("Error saving donor:", error);
+        }
+    };
+
+    const handlePayment = () => {
+        const iframe = document.getElementById("NedarimFrame") as HTMLIFrameElement;
+        if (iframe && iframe.contentWindow) {
+            iframe.contentWindow.postMessage(
+                {
+                    Name: "FinishTransaction2",
+                    Value: {
+                        Mosad: "7013230",
+                        ApiValid: "A1iMKiIXRo",
+                        Zeout: "",
+                        PaymentType: paymentType,
+                        Currency: "1",
+                        FirstName: firstName,
+                        LastName: lastName,
+                        Street: address,
+                        City: "",
+                        Phone: phone,
+                        Mail: email,
+                        Amount: amount,
+                        Tashlumim: paymentType === "HK" && months ? months : "1",
+                        Comment: "תרומה דרך האתר",
+                        Groupe: "",
+                        Param1: "",
+                        Param2: "",
+                        CallBack: "https://scrolls-website.onrender.com/paymentApi/payment-callback",
+                        CallBackMailError: "s0556737348@gmail.com"
+                    },
+                },
+                "*"
+            );
+        } else {
+            console.error("Iframe not found or contentWindow is unavailable.");
+        }
+    };
+
+    if (!showComponent) return null;
+
+    return (
+        <div style={{ maxWidth: "600px", margin: "auto", padding: "40px", borderRadius: "15px", boxShadow: "0 0 20px rgba(0,0,0,0.1)", backgroundColor: "#f9f9f9" }}>
+            <h2 style={{ textAlign: "center", color: "#2c3e50", marginBottom: "30px", fontFamily: "Arial, sans-serif", fontWeight: "bold" }}>
+                מלא את פרטיך האישיים
+            </h2>
+
+            {/* Toast עבור הודעות */}
+            <Toast ref={toast} />
+
+            <div className="p-fluid" style={{ marginBottom: "20px" }}>
+                <label style={{ fontSize: "16px", color: "#34495e" }}>שם פרטי:</label>
+                <InputText value={firstName} onChange={(e) => setFirstName(e.target.value)} style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }} />
+            </div>
+
+            <div className="p-fluid" style={{ marginBottom: "20px" }}>
+                <label style={{ fontSize: "16px", color: "#34495e" }}>שם משפחה:</label>
+                <InputText value={lastName} onChange={(e) => setLastName(e.target.value)} style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }} />
+            </div>
+
+            <div className="p-fluid" style={{ marginBottom: "20px" }}>
+                <label style={{ fontSize: "16px", color: "#34495e" }}>כתובת:</label>
+                <InputText
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
+                    style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }}
+                />
+            </div>
+
+            <div className="p-fluid" style={{ marginBottom: "20px" }}>
+                <label style={{ fontSize: "16px", color: "#34495e" }}>טלפון:</label>
+                <InputMask mask="999999999" value={phone} onChange={(e) => setPhone(e.value || "")} style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }} />
+            </div>
+
+            <div className="p-fluid" style={{ marginBottom: "20px" }}>
+                <label style={{ fontSize: "16px", color: "#34495e" }}>מייל:</label>
+                <InputText
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }}
+                />
+            </div>
+
+            <h3 style={{ textAlign: "center", color: "#2980b9", fontSize: "20px" }}>סכום לתשלום: {amount} ₪</h3>
+
+            <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
+                <Button
+                    label="תשלום חד-פעמי"
+                    onClick={() => setPaymentType("Ragil")}
+                    className={paymentType === "Ragil" ? "p-button-primary" : "p-button-outlined"}
+                    style={{ marginRight: "10px" }}
+                />
+                <Button
+                    label="הוראת קבע"
+                    onClick={() => setPaymentType("HK")}
+                    className={paymentType === "HK" ? "p-button-primary" : "p-button-outlined"}
+                />
+            </div>
+
+            {paymentType === "HK" && (
+                <div className="p-fluid" style={{ marginBottom: "20px" }}>
+                    <label style={{ fontSize: "16px", color: "#34495e" }}>מספר חודשים:</label>
+                    <InputText
+                        value={months}
+                        onChange={(e) => setMonths(e.target.value)}
+                        style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }}
+                        type="number"
+                        min="1"
+                        placeholder="הכנס מספר חודשים"
+                    />
+                </div>
+            )}
+
+            <iframe
+                id="NedarimFrame"
+                style={{
+                    width: "100%",
+                    height: "450px",
+                    border: "none",
+                    borderRadius: "10px",
+                    boxShadow: "0 0 15px rgba(0, 0, 0, 0.1)",
+                    marginTop: "20px",
+                }}
+                src="https://matara.pro/nedarimplus/iframe?language=he"
+            ></iframe>
+
+            <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
+                <Button label="אישור תשלום" onClick={handlePayment} className="p-button-success" style={{ padding: "10px 20px", fontSize: "16px", borderRadius: "5px" }} />
+            </div>
+        </div>
+    );
 };
 
 export default PersonalDetailsForm;
