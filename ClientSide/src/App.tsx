@@ -16,21 +16,19 @@ import DonationPage from './components/DonationPage/DonationPage';
 import DonationCart from './components/DonationCart/DonationCart';
 import { store, persistor } from '../src/redux/store'; // ייבוא נכון של ה-store וה-persistor
 import AddBasket from './components/AddBasket/AddBasket'; // ייבוא הקומפוננטה החדשה
+
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
-import AddAnnouncement from './components/AddAnnouncement/AddAnnouncement';
-<<<<<<< HEAD
-import ManageArea from './components/ManageArea/ManageArea';
+
 import DeleteBasket from './components/DeleteBasket/DeleteBasket';
-import Home from './components/Home/Home';
 import Layout from './components/Layout/Layout';
-
-
-
-
-=======
+import Home from './components/Home/Home';
+import ManageArea from './components/ManageArea/ManageArea';
+import AddAnnouncement from './components/AddAnnouncement/AddAnnouncement';
+// import ThankYou from './components/ThankYou/ThankYou';
 // import PersonalDetailsForm from './components/PersonalDetailsForm/PersonalDetailsForm';
->>>>>>> 3a8876f (payment treatment)
+// import PersonalDetailsForm from './components/PersonalDetailsForm/PersonalDetailsForm';
+
 
 
 
@@ -59,30 +57,20 @@ function App() {
         <div className="App" dir="rtl" lang="he">
           <Router>
             <Routes>
-
-              <Route path='/' element={<About />}></Route>
-              <Route path="/donation" element={<DonationPage />} />
-              <Route path="/donationCart" element={<DonationCart setCartVisible={setCartVisible} />} />
-              <Route path="/add-basket" element={<AddBasket />} /> {/* נתיב חדש */}
               <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} /> 
-
+              <Route path="/register" element={<Register />} />
               <Route path="/" element={<Layout />}>
                 <Route path='/About' element={<About />}></Route>
-                <Route path='/' element={<Home/>}></Route>
+                <Route path='/' element={<Home />}></Route>
                 <Route path="/donation" element={<DonationPage />} />
                 <Route path="/donationCart" element={<DonationCart setCartVisible={setCartVisible} />} />
                 <Route path="/add-basket" element={<AddBasket />} /> {/* נתיב חדש */}
                 <Route path="/manage-basket" element={<DeleteBasket />} /> {/* נתיב חדש */}
                 <Route path="/manage-area" element={<ManageArea />} />
-                <Route path="/add-masage" element={<AddAnnouncement/>} />
-                {/* <Route path="/fill-Personal-DetailsForm" element={<PersonalDetailsForm/>} /> */}
-
-
-
-
+                <Route path="/add-masage" element={<AddAnnouncement />} />
+                {/* <Route path="/thenks" element={<ThankYou />}></Route> */}
+                {/* <Route path="/payment" element={<PersonalDetailsForm />} /> */}
               </Route>
-
             </Routes>
           </Router>
         </div>
