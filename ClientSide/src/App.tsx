@@ -19,6 +19,7 @@ import AddBasket from './components/AddBasket/AddBasket'; // ייבוא הקומ
 import Register from './components/Register/Register';
 import Login from './components/Login/Login';
 import AddAnnouncement from './components/AddAnnouncement/AddAnnouncement';
+<<<<<<< HEAD
 import ManageArea from './components/ManageArea/ManageArea';
 import DeleteBasket from './components/DeleteBasket/DeleteBasket';
 import Home from './components/Home/Home';
@@ -27,6 +28,9 @@ import Layout from './components/Layout/Layout';
 
 
 
+=======
+// import PersonalDetailsForm from './components/PersonalDetailsForm/PersonalDetailsForm';
+>>>>>>> 3a8876f (payment treatment)
 
 
 
@@ -72,6 +76,9 @@ function App() {
                 <Route path="/manage-basket" element={<DeleteBasket />} /> {/* נתיב חדש */}
                 <Route path="/manage-area" element={<ManageArea />} />
                 <Route path="/add-masage" element={<AddAnnouncement/>} />
+                {/* <Route path="/fill-Personal-DetailsForm" element={<PersonalDetailsForm/>} /> */}
+
+
 
 
               </Route>
