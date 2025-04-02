@@ -52,6 +52,7 @@ function App() {
   const [cartVisible, setCartVisible] = useState(false);
 
   return (
+        <HashRouter>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <div className="App" dir="rtl" lang="he">
@@ -82,6 +83,8 @@ function App() {
         </div>
       </PersistGate>
     </Provider>
+        </HashRouter>
+
   );
 }
 
