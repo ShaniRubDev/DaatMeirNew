@@ -127,6 +127,7 @@ const uploadDir = path.join(__dirname, 'uploads');
 console.log("Uploads folder path:", uploadDir);
 
 // הגדרות ביניים
+app.use(express.static(path.join(__dirname, 'build'))); // שיתוף קבצי ה-build של React
 app.use(cors());
 app.use(express.static(publicPath));
 app.use(cookieParser());
@@ -202,6 +203,10 @@ app.post('/login', async (req, res) => {
         console.log("Error logging in:", error);
         res.status(500).json({ message: "Internal server error" });
     }
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // הפעלת השרת
