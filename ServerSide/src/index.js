@@ -185,17 +185,19 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 });
+
+
 app.get('*', (req, res) => {
-  console.log(path.join(__dirname, 'build', 'index.html'))
-    const buildPath = path.join(__dirname, 'build', 'index.html');
-    res.sendFile(buildPath);
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
-// });
+
+
 
 // הפעלת השרת
 app.listen(5000, () => {
     console.log(`App is listening on port http://localhost:5000`);
 });
+
+
+
