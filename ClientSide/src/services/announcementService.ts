@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 // פונקציה לקבלת המודעה הפעילה
-const basePath  = 'http://localhost:5000/announcements'
+const basePath = 'http://localhost:5000/announcements'
 export const getActiveAnnouncement = async () => {
     try {
         const response = await axios.get(`${basePath}/active`);
@@ -18,16 +18,36 @@ export const createAnnouncement = async (announcementData: {
     startDate: string;
     endDate: string;
     isActive: boolean;
-  }) => {
+}) => {
     try {
-      const response = await axios.post(`${basePath}/create`,announcementData, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+        const response = await axios.post(`${basePath}/create`, announcementData, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Error creating announcement", error);
+        throw error;
+    }
+};
+export const getAllAnnouncements = async () => {
+    try {
+        const response = await axios.get(`${basePath}/all`);
+        console.log(response)
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching all announcements:', error);
+        throw error;
+    }
+
+};
+export const deleteAnnouncement = async (announcementId:number) => {
+    try {
+      const response = await axios.delete(`${basePath}/delete/${announcementId}`);
       return response.data;
     } catch (error) {
-      console.error("Error creating announcement", error);
+      console.error('Error deleting announcement:', error);
       throw error;
     }
   };

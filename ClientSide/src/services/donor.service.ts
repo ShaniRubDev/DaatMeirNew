@@ -18,3 +18,12 @@ export const saveDonor = async (donorData: {
     throw error;
   }
 };
+
+export const fetchDonors = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/all`);
+      return response.data;  // הנתונים שהשרת מחזיר
+    } catch (error) {
+      throw new Error("שגיאה בטעינת התורמים");
+    }
+  };

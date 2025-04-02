@@ -117,11 +117,11 @@ export default function AddBasketWithImageUpload() {
                 <Messages ref={msgs} />  {/* כאן ממוקמת הודעת ההצלחה או השגיאה */}
                 <Toast ref={toast}></Toast>
                 <form onSubmit={handleSubmit}>
-                    <h3 className="text-center mb-4">Add New Basket</h3>
+                    <h3 className="text-center mb-4">הוסף סל חדש</h3>
                     <Row className="mb-3">
                         <Col sm={12}>
                             <Form.Group controlId="title">
-                                <Form.Label>Title</Form.Label>
+                                <Form.Label>כותרת סל</Form.Label>
                                 <Form.Control
                                     type="text"
                                     name="title"
@@ -138,7 +138,7 @@ export default function AddBasketWithImageUpload() {
                     <Row className="mb-3">
                         <Col sm={12}>
                             <Form.Group controlId="description">
-                                <Form.Label>Description</Form.Label>
+                                <Form.Label>תיאור הסל</Form.Label>
                                 <Form.Control
                                     as="textarea"
                                     name="description"
@@ -156,7 +156,7 @@ export default function AddBasketWithImageUpload() {
                     <Row className="mb-3">
                         <Col sm={12} md={6}>
                             <Form.Group controlId="sum">
-                                <Form.Label>Sum</Form.Label>
+                                <Form.Label>סכום</Form.Label>
                                 <Form.Control
                                     type="number"
                                     name="sum"
@@ -173,7 +173,7 @@ export default function AddBasketWithImageUpload() {
                             <Form.Group controlId="freeAmount">
                                 <Form.Check
                                     type="checkbox"
-                                    label="Free Amount"
+                                    label="סכום חופשי"
                                     name="freeAmount"
                                     checked={basketData.freeAmount}
                                     onChange={handleChange}
@@ -189,11 +189,11 @@ export default function AddBasketWithImageUpload() {
                     <Row className="mb-3">
                         <Col sm={12}>
                             <Form.Group controlId="imageUpload">
-                                <Form.Label>Upload Image</Form.Label>
+                                <Form.Label>העלה תמונה מתאימה</Form.Label>
                                 <FileUpload
                                     mode="basic"
                                     name="image"
-                                    url="/api/upload"
+                                    // url="/api/upload"
                                     accept="image/*"
                                     maxFileSize={1000000}
                                     onUpload={onUpload}
@@ -202,12 +202,13 @@ export default function AddBasketWithImageUpload() {
                                     cancelLabel="Cancel"
                                     onSelect={(e) => setImage(e.files[0])}
                                     className="w-100"
+                                    
                                 />
                             </Form.Group>
                         </Col>
                     </Row>
 
-                    <Button type="submit" className="w-100 cta-button mt-4">Submit</Button>
+                    <Button type="submit" className="w-100 cta-button mt-4">שלח</Button>
                 </form>
             </div>
         </div>

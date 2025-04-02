@@ -5,11 +5,174 @@ $blue-color: #66a499;
 $border-radius: 10px;
 
 
+// .home {
+//     *{
+//         font-family: "Heebo", sans-serif;
+
+//     }
+//     color: #333;
+
+//     .hero-background {
+//         width: 100%;
+//         height: 60vh;
+//         object-fit: cover;
+//         opacity: 20%;
+//     }
+
+//     .hero-content {
+//         position: absolute;
+//         top: 50%;
+//         left: 50%;
+//         transform: translate(-50%, -50%);
+//         z-index: 2;
+//     }
+
+//     .hero {
+//         height: 60vh;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         text-align: center;
+//         color: #34495e;
+//         padding: 20px;
+//     }
+
+//     .hero-content h1 {
+//         font-size: 3rem;
+//         font-weight: bold;
+//         margin-bottom: 15px;
+//         font-family: 'Poppins', sans-serif; /* שינוי הגופן */
+//     }
+
+//     .hero-content p {
+//         font-size: 1.5rem;
+//         margin-bottom: 30px;
+//         font-family: 'Roboto', sans-serif; /* שינוי הגופן */
+//     }
+
+//     .cta-button {
+//         padding: 15px 40px;
+//         font-size: 1.2rem;
+//         background-color: #66a499;
+//         color: white;
+//         border: none;
+//         border-radius: 30px;
+//         cursor: pointer;
+//         transition: background 0.3s, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+//         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+//     }
+
+//     .cta-button:hover {
+//         background-color:  #c6d2df;
+//         transform: translateY(-3px);
+//         box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
+//     }
+
+//     .cta-button:focus {
+//         outline: none;
+//         box-shadow: 0px 0px 10px 2px rgba(0, 72, 173, 0.7);
+//     }
+
+
+//    .about {
+//         background-color: rgba(70, 148, 134, 0.4); // שקיפות מוגברת (0.6 במקום 0.9)
+//         ;
+//         padding: 60px 20px;
+//         display: flex;
+//         justify-content: center;
+
+//         .about-container {
+//           max-width: 800px;
+//           text-align: center;
+//         }
+
+//         .about-title {
+//             color: #f8f8f8;
+//           font-size: 2.5rem;
+//           font-weight: bold;
+//           color: $secondary-color;
+//           margin-bottom: 20px;
+//           position: relative;
+//           font-family: "Heebo", sans-serif;
+
+//           &::after {
+//             content: "";
+//             display: block;
+//             width: 100px;
+//             height: 4px;
+//             background: $secondary-color;
+//             margin: 10px auto 0;
+//             border-radius: 2px;
+//           }
+//         }
+
+//         .about-description {
+//           font-size: 1.5rem;
+//           color: #f8f8f8;
+//           margin-bottom: 30px;
+//           font-family: "Heebo", sans-serif;
+//           font-weight: 600;
+//         }
+
+//         .about-content {
+//           display: flex;
+//           flex-direction: column;
+//           gap: 20px;
+//         }
+
+//         .about-text {
+//           font-size: 1.2rem;
+//           color: #f8f8f8;
+//           line-height: 1.8;
+//           text-align: center; // ממרכז את כל הפסקאות
+//           margin-bottom: 10px; // רווח קטן יותר בין הפסקאות
+//           line-height: 1.6; // שמירה על קריאות טובה
+//           max-width: 800px; // מגביל את הרוחב כדי שהתוכן לא יתפרס על כל המס
+//           padding: 0 10px;
+
+//         }
+//       }
+//     .features {
+//         display: flex;
+//         justify-content: space-around;
+//         padding: 50px 20px;
+//         background-color: #ffffff;
+//     }
+
+//     .feature {
+//         text-align: center;
+//         width: 30%;
+//     }
+
+//     .feature img {
+//         width: 180px;  /* גודל אחיד לתמונות */
+//         height: 180px; /* גובה אחיד לתמונות */
+//         object-fit: cover;
+//         border-radius: 50%; /* עיגול התמונה */
+//         border: 3px solid #fff; /* הוספת גבול לתמונה */
+//         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* צל לתמונה */
+//     }
+
+//     .call-to-action {
+//         text-align: center;
+//         padding: 40px 20px;
+//         background-color: #f9f9f9;
+//     }
+
+//     .call-to-action h2 {
+//         font-size: 2rem;
+//         margin-bottom: 20px;
+//     }
+
+
+// }
+
+
 .home {
-    *{
+    * {
         font-family: "Heebo", sans-serif;
-    
     }
+
     color: #333;
 
     .hero-background {
@@ -24,7 +187,8 @@ $border-radius: 10px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 2;
+        text-align: center;
+        width: 90%;
     }
 
     .hero {
@@ -38,182 +202,136 @@ $border-radius: 10px;
     }
 
     .hero-content h1 {
-        font-size: 3rem;
+        font-size: 2.5rem;
         font-weight: bold;
-        margin-bottom: 15px;
-        font-family: 'Poppins', sans-serif; /* שינוי הגופן */
     }
 
     .hero-content p {
-        font-size: 1.5rem;
-        margin-bottom: 30px;
-        font-family: 'Roboto', sans-serif; /* שינוי הגופן */
+        font-size: 1.3rem;
+        margin-bottom: 20px;
     }
 
     .cta-button {
-        padding: 15px 40px;
-        font-size: 1.2rem;
+        padding: 12px 30px;
+        font-size: 1rem;
         background-color: #66a499;
         color: white;
         border: none;
         border-radius: 30px;
         cursor: pointer;
-        transition: background 0.3s, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
     }
 
     .cta-button:hover {
-        background-color:  #c6d2df;
+        background-color: #c6d2df;
         transform: translateY(-3px);
-        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
     }
-
-    .cta-button:focus {
-        outline: none;
-        box-shadow: 0px 0px 10px 2px rgba(0, 72, 173, 0.7);
-    }
-
-    // .about {
-    //     padding: 40px 20px;
-    //     text-align: center;
-    //     background-color: #4694869a;
-    //     // opacity: 10%;
-    // }
-
-    // // .about-title {
-    // //     // font-size: 1.5rem;
-    // //     // color: #34495e;
-    // //     // margin-bottom: 30px;
-    // //     // font-family: 'Roboto', sans-serif; /* שינוי הגופן */
-    // //     font-size: 2.5rem; /* גודל טקסט כותרת */
-    // //     color: #fff;
-    // //     font-weight: bold;
-    // //     margin-bottom: 20px;
-    // // }
-
-    // .about-title {
-    //     font-size: 2.5rem;
-    //     font-weight: bold;
-    //     color:$secondary-color;
-    //     margin-bottom: 15px;
-    //     position: relative;
-    //     display: inline-block;
-    //     font-family: "Heebo", sans-serif;
-  
-    //     &::after {
-    //       display: block;
-    //       width: 80px;
-    //       height: 4px;
-    //       background: $secondary-color;
-    //       margin: 10px auto 0;
-    //       border-radius: 2px;
-          
-    //     }
-    //   }
-    // .about-description {
-    //     font-size: 1.5rem;
-    //     color: #ecf0f1;
-    //     margin-bottom: 30px;
-    //     font-family: "Heebo", sans-serif;
-
-    // }
-    // .about-text {
-    //     font-size: 1.1rem;
-    //     color: #666;
-    //     line-height: 1.6;
-    //     font-family: "Heebo", sans-serif;
-    // }
-
 
     .about {
-        background-color: rgba(70, 148, 134, 0.4); // שקיפות מוגברת (0.6 במקום 0.9)
-        ;
-        padding: 60px 20px;
+        background-color: rgba(70, 148, 134, 0.4);
+        padding: 50px 20px;
         display: flex;
         justify-content: center;
-      
+
         .about-container {
-          max-width: 800px;
-          text-align: center;
+            max-width: 800px;
+            text-align: center;
         }
-      
+
         .about-title {
-            color: #f8f8f8;
-          font-size: 2.5rem;
-          font-weight: bold;
-          color: $secondary-color;
-          margin-bottom: 20px;
-          position: relative;
-          font-family: "Heebo", sans-serif;
-      
-          &::after {
-            content: "";
-            display: block;
-            width: 100px;
-            height: 4px;
-            background: $secondary-color;
-            margin: 10px auto 0;
-            border-radius: 2px;
-          }
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f1f5f9;
         }
-      
-        .about-description {
-          font-size: 1.5rem;
-          color: #f8f8f8;
-          margin-bottom: 30px;
-          font-family: "Heebo", sans-serif;
-          font-weight: 600;
-        }
-      
-        .about-content {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-        }
-      
+
+        .about-description,
         .about-text {
-          font-size: 1.2rem;
-          color: #f8f8f8;
-          line-height: 1.8;
-          text-align: center; // ממרכז את כל הפסקאות
-          margin-bottom: 10px; // רווח קטן יותר בין הפסקאות
-          line-height: 1.6; // שמירה על קריאות טובה
-          max-width: 800px; // מגביל את הרוחב כדי שהתוכן לא יתפרס על כל המס
-          padding: 0 10px;
-       
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: white;
         }
-      }
+    }
+
     .features {
         display: flex;
-        justify-content: space-around;
-        padding: 50px 20px;
-        background-color: #ffffff;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 40px 20px;
+        gap: 20px;
+        background-color: #fff;
     }
 
     .feature {
         text-align: center;
-        width: 30%;
+        flex: 1 1 300px;
+        max-width: 300px;
     }
 
     .feature img {
-        width: 180px;  /* גודל אחיד לתמונות */
-        height: 180px; /* גובה אחיד לתמונות */
+        width: 150px;
+        height: 150px;
         object-fit: cover;
-        border-radius: 50%; /* עיגול התמונה */
-        border: 3px solid #fff; /* הוספת גבול לתמונה */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* צל לתמונה */
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .call-to-action {
         text-align: center;
-        padding: 40px 20px;
+        padding: 30px 20px;
         background-color: #f9f9f9;
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
     }
 
-    .call-to-action h2 {
-        font-size: 2rem;
-        margin-bottom: 20px;
+    /* מדיה קווריז */
+    @media (max-width: 768px) {
+        .hero-content h1 {
+            font-size: 2rem;
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+        }
+
+        .cta-button {
+            font-size: 0.9rem;
+            padding: 10px 20px;
+        }
+
+        .about-title {
+            font-size: 1.8rem;
+        }
+
+        .about-description,
+        .about-text {
+            font-size: 1rem;
+        }
     }
 
-   
+    @media (max-width: 480px) {
+        .hero-content h1 {
+            font-size: 1.8rem;
+        }
+
+        .hero-content p {
+            font-size: 0.9rem;
+        }
+
+        .cta-button {
+            font-size: 0.8rem;
+            padding: 8px 16px;
+        }
+
+        .feature img {
+            width: 120px;
+            height: 120px;
+        }
+
+        .about-title {
+            font-size: 1.6rem;
+        }
+    }
 }

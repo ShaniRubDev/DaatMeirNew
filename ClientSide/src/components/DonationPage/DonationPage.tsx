@@ -119,10 +119,12 @@ const DonationPage: FC<DonationPageProps> = () => {
   }, []);
 
   const handleAmountChange = (index: number, value: number) => {
-    setCustomAmounts(prev => ({
-      ...prev,
-      [index]: value
-    }));
+  console.log(`Index: ${index}, New Value: ${value}`);
+
+  setCustomAmounts(prev => ({
+    ...prev,
+    [index]: value
+  }));
   };
 
   // const handleAddToCart = (donation: DonationOption, index: number) => {
@@ -131,7 +133,18 @@ const DonationPage: FC<DonationPageProps> = () => {
   // };
 
   const handleAddToCart = (donation: DonationOption, index: number) => {
-    const amountToDonate = donation.freeAmount ? customAmounts[index] || 0 : donation.sum;
+    // const amountToDonate = donation.freeAmount ? customAmounts[index] || 0 : donation.sum;
+    // const amountToDonate = donation.freeAmount ? (customAmounts[index] || 0) : donation.sum;
+    // console.log(`amountToDonate` + amountToDonate)
+    // dispatch(addToCart({ ...donation, sum: amountToDonate }));
+    const amountToDonate = donation.sum === 0 ? customAmounts[index] : donation.sum;
+
+    console.log(`customAmounts[${index}]:`, customAmounts[index]); // לוודא שהערך נכנס כראוי
+    console.log(`amountToDonate:`, amountToDonate); // להדפיס את הסכום הסופי
+    
+    dispatch(addToCart({ ...donation, sum: amountToDonate }));
+    
+    // הוסף את התרומה עם הסכום המעודכן
     dispatch(addToCart({ ...donation, sum: amountToDonate }));
 
     // הצגת הודעת הצלחה
@@ -150,7 +163,7 @@ const DonationPage: FC<DonationPageProps> = () => {
   return (
     <div className="DonationPage">
       <div className="donation-page">
-        <h1 className="title">סלי צדקה - ברכה עבורכם</h1>
+        {/* <h1 className="title">סלי צדקה - ברכה עבורכם</h1> */}
         <Link to="/add-basket">
           <i className="bi bi-basket-plus" style={{ fontSize: "30px", color: "blue", cursor: "pointer" }}></i>
         </Link>
@@ -177,7 +190,8 @@ const DonationPage: FC<DonationPageProps> = () => {
                   </label>
                   <InputNumber
                     inputId={`customAmount-${index}`}
-                    value={customAmount}
+                    // value={customAmount}
+                    value={customAmounts[index] || 0} 
                     useGrouping={false}
                     onValueChange={(e) => handleAmountChange(index, e.value ?? 0)}
                     placeholder="סכום חודשי"

@@ -126,7 +126,7 @@ const Announcement = () => {
   };
 
   if (!announcement) {
-    return <div>טוען את המודעה...</div>;
+    return <div></div>;
   }
 
   return (

@@ -1,187 +1,3 @@
-
-// import React, { useState, useEffect, useRef } from "react";
-// import { InputText } from "primereact/inputtext";
-// import { Button } from "primereact/button";
-// import { InputMask } from "primereact/inputmask";
-// import { Message } from "primereact/message";
-// import { useNavigate, useLocation } from 'react-router-dom';
-
-// import axios from "axios";
-
-// const PersonalDetailsForm: React.FC = () => {
-//   const location = useLocation();
-//   const amount = location.state?.amount || 0; // אם אין סכום, ברירת המחדל תהיה 0
-
-//   const [firstName, setFirstName] = useState("");
-//   const [lastName, setLastName] = useState("");
-//   const [phone, setPhone] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [address, setAddress] = useState("");
-//   const [paymentType, setPaymentType] = useState<"Ragil" | "HK">("Ragil");
-//   const [months, setMonths] = useState<string>("");
-//   const [message, setMessage] = useState<{ severity: "success" | "error"; text: string } | null>(null);
-//   const iframeRef = useRef<any>();
-//   const navigate = useNavigate();
-//   const [showComponent, setShowComponent] = useState(true);
-
-//   useEffect(() => {
-//     const messageListener = (event: MessageEvent) => {
-//       if (event.origin.includes("matara.pro")) {
-//         console.log("Message from iframe:", event.data);
-//         if (event.data?.Name === "Heightss") {
-//           iframeRef.current.style.height = `${parseInt(event.data.Value) + 15}px`;
-//         }
-//         if (event.data.Value?.Status === 'OK') {
-//           window.location.href = "/thenks";
-//           setTimeout(() => {
-//             setShowComponent(false);
-//             navigate("/thenks");
-//           }, 1000);
-//         }
-//         else if (event.data.Value?.Status === "Error") {
-//           setMessage({ severity: "error", text: "שגיאה בביצוע התשלום. נסה שוב מאוחר יותר." });
-//         }
-//         // setTimeout(() => setMessage(null), 1000); // מעלים את ההודעה אחרי 5 שניות
-//         setTimeout(() => setMessage(null), 10000); // מעלים את ההודעה אחרי 10 שניות
-
-//       }
-//     };
-
-//     window.addEventListener("message", messageListener);
-//     return () => window.removeEventListener("message", messageListener);
-//   }, []);
-
-//   const handleSubmit = async () => {
-//     try {
-//       const response = await axios.post("http://localhost:5000/donor/save-donor", {
-//         firstName,
-//         lastName,
-//         phone,
-//         email,
-//         address,
-//       });
-//       console.log("Donor saved:", response.data);
-//     } catch (error) {
-//       console.error("Error saving donor:", error);
-//     }
-//   };
-
-//   const handlePayment = () => {
-//     handleSubmit();
-//     const iframe = document.getElementById("NedarimFrame") as HTMLIFrameElement;
-//     if (iframe && iframe.contentWindow) {
-//       iframe.contentWindow.postMessage(
-//         {
-//           Name: "FinishTransaction2",
-//           Value: {
-//             Mosad: "7013230",
-//             ApiValid: "A1iMKiIXRo",
-//             Zeout: "",
-//             PaymentType: paymentType,
-//             Currency: "1",
-//             FirstName: firstName,
-//             LastName: lastName,
-//             Street: address,
-//             City: "",
-//             Phone: phone,
-//             Mail: email,
-//             Amount: amount,
-//             Tashlumim: paymentType === "HK" && months ? months : "1",
-//             Comment: "תרומה דרך האתר",
-//             Groupe: "",
-//             Param1: "",
-//             Param2: "",
-//             CallBack: "https://scrolls-website.onrender.com/paymentApi/payment-callback",
-//             CallBackMailError: "scrollsSite@gmail.com",
-//           },
-//         },
-//         "*"
-//       );
-//     } else {
-//       console.error("Iframe not found or contentWindow is unavailable.");
-//     }
-//   };
-
-//   if (!showComponent) return null;
-
-//   return (
-//     <div style={{ maxWidth: "600px", margin: "auto", padding: "40px", borderRadius: "15px", boxShadow: "0 0 20px rgba(0,0,0,0.1)", backgroundColor: "#f9f9f9" }}>
-//       <h2 style={{ textAlign: "center", color: "#2c3e50", marginBottom: "30px", fontFamily: "Arial, sans-serif", fontWeight: "bold" }}>
-//         מלא את פרטיך האישיים
-//       </h2>
-
-//       {message && (
-//         <Message severity={message.severity} text={message.text} style={{ marginBottom: "20px" }} />
-//       )}
-
-//       <div className="p-fluid" style={{ marginBottom: "20px" }}>
-//         <label style={{ fontSize: "16px", color: "#34495e" }}>שם פרטי:</label>
-//         <InputText value={firstName} onChange={(e) => setFirstName(e.target.value)} style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }} />
-//       </div>
-
-//       <div className="p-fluid" style={{ marginBottom: "20px" }}>
-//         <label style={{ fontSize: "16px", color: "#34495e" }}>שם משפחה:</label>
-//         <InputText value={lastName} onChange={(e) => setLastName(e.target.value)} style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }} />
-//       </div>
-
-//       <div className="p-fluid" style={{ marginBottom: "20px" }}>
-//         <label style={{ fontSize: "16px", color: "#34495e" }}>טלפון:</label>
-//         <InputMask mask="999999999" value={phone} onChange={(e) => setPhone(e.value || "")} style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }} />
-//       </div>
-
-//       <h3 style={{ textAlign: "center", color: "#2980b9", fontSize: "20px" }}>סכום לתשלום: {amount} ₪</h3>
-
-//       <div style={{ display: "flex", justifyContent: "center", marginBottom: "20px" }}>
-//         <Button
-//           label="תשלום חד-פעמי"
-//           onClick={() => setPaymentType("Ragil")}
-//           className={paymentType === "Ragil" ? "p-button-primary" : "p-button-outlined"}
-//           style={{ marginRight: "10px" }}
-//         />
-//         <Button
-//           label="הוראת קבע"
-//           onClick={() => setPaymentType("HK")}
-//           className={paymentType === "HK" ? "p-button-primary" : "p-button-outlined"}
-//         />
-//       </div>
-
-//       {paymentType === "HK" && (
-//         <div className="p-fluid" style={{ marginBottom: "20px" }}>
-//           <label style={{ fontSize: "16px", color: "#34495e" }}>מספר חודשים:</label>
-//           <InputText
-//             value={months}
-//             onChange={(e) => setMonths(e.target.value)}
-//             style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }}
-//             type="number"
-//             min="1"
-//             placeholder="הכנס מספר חודשים"
-//           />
-//         </div>
-//       )}
-
-//       <iframe
-//         id="NedarimFrame"
-//         style={{
-//           width: "100%",
-//           height: "450px",
-//           border: "none",
-//           borderRadius: "10px",
-//           boxShadow: "0 0 15px rgba(0, 0, 0, 0.1)",
-//           marginTop: "20px",
-//         }}
-//         src="https://matara.pro/nedarimplus/iframe?language=he"
-//       ></iframe>
-
-//       <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
-//         <Button label="אישור תשלום" onClick={handlePayment} className="p-button-success" style={{ padding: "10px 20px", fontSize: "16px", borderRadius: "5px" }} />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default PersonalDetailsForm;
-
-
 import React, { useState, useEffect, useRef } from "react";
 import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
@@ -190,6 +6,10 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import axios from "axios";
 import { Toast } from 'primereact/toast'; // ייבוא של Toast
 import { saveDonor } from '../../services/donor.service'
+import { saveDonations } from "../../services/donationsService";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../redux/store";
+import { clearCart } from "../../redux/cartSlice";
 
 
 const PersonalDetailsForm: React.FC = () => {
@@ -207,7 +27,9 @@ const PersonalDetailsForm: React.FC = () => {
     const navigate = useNavigate();
     const [showComponent, setShowComponent] = useState(true);
     const toast = useRef<Toast>(null); // יצירת רפרנס ל-Toast
-    let donorId
+    const dispatch = useDispatch();
+    const cartItems = useSelector((state: RootState) => state.cart.cartItems);
+
 
     useEffect(() => {
         const messageListener = (event: MessageEvent) => {
@@ -270,21 +92,6 @@ const PersonalDetailsForm: React.FC = () => {
         return () => window.removeEventListener("message", messageListener);
     }, [firstName, lastName, phone, email, address]);
 
-    // const handlePaymentSuccess = async () => {
-    //     try {
-    //         const donorData = { firstName, lastName, phone, email, address };
-    //         const response = await saveDonor(donorData); // קריאה לשרת
-    //         console.log("Donor ID:", response.donor.id);
-
-    //         setTimeout(() => {
-    //             setShowComponent(false);
-    //             navigate("/thenks");
-    //         }, 1000);
-
-    //     } catch (error) {
-    //         console.error("Error saving donor:", error);
-    //     }
-    // };
 
     const handlePaymentSuccess = async () => {
         if (!firstName || !lastName || !phone || !email || !address) {
@@ -301,36 +108,55 @@ const PersonalDetailsForm: React.FC = () => {
         try {
             const donorData = { firstName, lastName, phone, email, address };
             const response = await saveDonor(donorData);
-            
-            console.log("Donor ID:", response.donor.insertId);
+            const donorId = response.donor.id;
+            console.log(donorId)
+            const donations = cartItems.map(item => ({
+                donorId,
+                amount: item.sum,
+                frequency: paymentType === "HK" ? "קבוע" : "חד-פעמי", // ✅ קובע את התדירות לפי סוג התשלום
+                destination: item.title,
+                notes: null
+            }));
+            console.log(donations)
+            // שליחת כל התרומות
+            await saveDonations(donations);
 
-            setTimeout(() => {
-                setShowComponent(false);
-                navigate("/thenks");
-            }, 1000);
+            console.log("✅ Donations saved successfully!");
+            dispatch(clearCart());
+            navigate("/thenks");
+
+
+            // console.log("Donor ID:", response.donor.insertId);
+
+
+
+            // setTimeout(() => {
+            //     setShowComponent(false);
+            //     navigate("/thenks");
+            // }, 1000);
         } catch (error) {
-            console.error("Error saving donor:", error);
+            console.error("Error saving donor or donations:", error);
         }
     };
 
 
-    const handleSubmit = async () => {
-        try {
-            const response = await axios.post("http://localhost:5000/donor/save-donor", {
-                firstName,
-                lastName,
-                phone,
-                email,
-                address,
-            });
-            console.log("Donor saved:", response.data);
-            donorId = response.data.donor.id; // קבלת ה-ID של התורם
-            console.log(donorId);
+    // const handleSubmit = async () => {
+    //     try {
+    //         const response = await axios.post("http://localhost:5000/donor/save-donor", {
+    //             firstName,
+    //             lastName,
+    //             phone,
+    //             email,
+    //             address,
+    //         });
+    //         console.log("Donor saved:", response.data);
+    //         donorId = response.data.donor.id; // קבלת ה-ID של התורם
+    //         console.log(donorId);
 
-        } catch (error) {
-            console.error("Error saving donor:", error);
-        }
-    };
+    //     } catch (error) {
+    //         console.error("Error saving donor:", error);
+    //     }
+    // };
 
     const handlePayment = () => {
         const iframe = document.getElementById("NedarimFrame") as HTMLIFrameElement;
@@ -366,6 +192,7 @@ const PersonalDetailsForm: React.FC = () => {
             console.error("Iframe not found or contentWindow is unavailable.");
         }
     };
+
 
     if (!showComponent) return null;
 

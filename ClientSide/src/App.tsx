@@ -23,6 +23,11 @@ import ManageArea from './components/ManageArea/ManageArea';
 import AddAnnouncement from './components/AddAnnouncement/AddAnnouncement';
 import ThankYou from './components/ThankYou/ThankYou';
 import PersonalDetailsForm from './components/PersonalDetailsForm/PersonalDetailsForm';
+import DonationsList from './components/DonationsList/DonationsList';
+import DonorsList from "./components/DonorsList/DonorsList"
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
+import ManageAnnouncements from './components/ManageAnnouncements/ManageAnnouncements';
 // import PersonalDetailsForm from './components/PersonalDetailsForm/PersonalDetailsForm';
 
 
@@ -63,6 +68,11 @@ function App() {
                 <Route path="/add-masage" element={<AddAnnouncement/>} />
                 <Route path = "/thenks" element={<ThankYou/>}></Route>
                 <Route path="/payment" element={<PersonalDetailsForm  />} />
+                <Route path="/DonationsList" element={<DonationsList/>} />
+                <Route path="/DonorsList" element={<DonorsList/>} />
+                <Route path="/Login" element={<Login/>} />
+                <Route path="/register" element={<Register/>} />
+                <Route path="/manageAn" element={<ManageAnnouncements/>} />
 
 
 

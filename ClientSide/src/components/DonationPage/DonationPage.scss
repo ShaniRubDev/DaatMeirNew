@@ -51,14 +51,14 @@
 //   }
 
 .donate-button {
-    background-color: #4B5563; /* אפור כהה */
+    padding: 12px 30px;
+    font-size: 1rem;
+    background-color: #66a499;
     color: white;
     border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 5px;
+    border-radius: 30px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
   
     &:hover {
       background-color: #374151; /* כהה יותר בעת ריחוף */
