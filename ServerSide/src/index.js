@@ -104,11 +104,11 @@ const uploadDir = path.join(__dirname, 'uploads');
 // הדפסת נתיב תיקיית העלאות לאימות
 console.log("Uploads folder path:", uploadDir);
 
-app.use(express.static(path.join(__dirname, 'build'))); // שיתוף קבצי ה-build של React
+// app.use(express.static(path.join(__dirname, 'build'))); // שיתוף קבצי ה-build של React
 
 
 // הגדרות ביניים
-app.use(express.static(path.join(__dirname, 'build'))); // שיתוף קבצי ה-build של React
+app.use(express.static(path.join(__dirname, 'ClientSide/build'))); // שיתוף קבצי ה-build של React
 app.use(cors());
 app.use(express.static(publicPath));
 app.use(cookieParser());
@@ -186,12 +186,12 @@ app.post('/login', async (req, res) => {
     }
 });
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'ClientSide', 'build', 'index.html'));
 });
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'build', 'index.html'));
+// });
 
 // הפעלת השרת
 app.listen(5000, () => {
