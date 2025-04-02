@@ -186,8 +186,10 @@ app.post('/login', async (req, res) => {
     }
 });
 app.get('*', (req, res) => {
-  console.log(path.join(__dirname, 'ClientSide', 'build', 'index.html'));
-    res.sendFile(path.join(__dirname, 'ClientSide', 'build', 'index.html'));
+  // console.log(path.join(__dirname, 'ClientSide', 'build', 'index.html'));
+console.log(path.join(__dirname, '..', 'ClientSide', 'build', 'index.html'));
+
+    res.sendFile(path.join(__dirname, '..', 'ClientSide', 'build', 'index.html'));
 });
 
 // app.get('*', (req, res) => {
