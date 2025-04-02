@@ -1,25 +1,3 @@
-// const express = require('express');
-// const fs = require('fs')
-// const path = require('path')
-// const cors = require('cors');
-// const basketRoute = require('./routers/basketRoute')
-// const app = express();
-// const session = require('express-session');
-// const bodyParser = require('body-parser');
-// const cookieParser = require('cookie-parser');
-// const publicPath = path.join(__dirname, 'public');
-// const uploadDir = path.join(__dirname, 'uploads');
-// const announcementRoutes = require('./routers/announcementRoute');
-// const donorRoute = require('./routers/donorRouters')
-// const donationRoutes = require('./routers/donationRoutes')
-
-// // הדפס את הנתיב על מנת לוודא שהוא נכון
-// console.log("Uploads folder path:", uploadDir);
-
-// app.use(cors()); // Add this line
-// app.use(express.static(publicPath));
-// app.use(cookieParser());
-// app.use(bodyParser.json());
 
 // app.use(bodyParser.urlencoded({ extended: true }));
 // // app.use(session({
@@ -126,6 +104,9 @@ const uploadDir = path.join(__dirname, 'uploads');
 // הדפסת נתיב תיקיית העלאות לאימות
 console.log("Uploads folder path:", uploadDir);
 
+app.use(express.static(path.join(__dirname, 'build'))); // שיתוף קבצי ה-build של React
+
+
 // הגדרות ביניים
 app.use(cors());
 app.use(express.static(publicPath));
@@ -202,6 +183,9 @@ app.post('/login', async (req, res) => {
         console.log("Error logging in:", error);
         res.status(500).json({ message: "Internal server error" });
     }
+});
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 // הפעלת השרת
