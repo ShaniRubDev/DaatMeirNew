@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/donation"; // עדכן לפי כתובת ה-API שלך
+const API_URL = "https://daatmeirnew.onrender.com/donation"; // עדכן לפי כתובת ה-API שלך
 
 export const saveDonations = async (donations: any[]) => {
     try {

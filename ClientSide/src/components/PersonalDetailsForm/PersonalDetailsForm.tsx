@@ -63,7 +63,7 @@ const PersonalDetailsForm: React.FC = () => {
 
                 }
                 else if (event.data.Value?.Status === "Error") {
-                    handlePaymentSuccess(); // קריאה לפונקציה אסינכרונית
+                    // handlePaymentSuccess(); // קריאה לפונקציה אסינכרונית
                     if (!firstName || !lastName || !phone || !email || !address) {
                         console.error("❌ Missing required donor fields!");
                         toast.current?.show({

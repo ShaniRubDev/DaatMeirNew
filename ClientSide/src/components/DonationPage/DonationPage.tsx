@@ -178,7 +178,7 @@ const DonationPage: FC<DonationPageProps> = () => {
               title={option.title}
               subTitle={option.sum ==0 ?null:`${option.sum} ₪`}
               header={
-                <img alt={option.title} src={`http://localhost:5000${option.image}`} className="donation-image" />
+                <img alt={option.title} src={`https://daatmeirnew.onrender.com${option.image}`} className="donation-image" />
               }
               className="donation-card"
             >

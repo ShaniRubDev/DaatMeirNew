@@ -18,7 +18,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/register', { email, password });
+      const response = await axios.post('https://daatmeirnew.onrender.com/register', { email, password });
       toast.current.show({ severity: 'success', summary: 'Success', detail: response.data.message });
       navigate("/manage-area");
     } 

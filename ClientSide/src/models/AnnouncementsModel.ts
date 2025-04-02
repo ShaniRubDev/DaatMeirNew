@@ -10,7 +10,7 @@ export interface AnnouncementsModelFromService {
     id:number
     title: string;
     content: string;
-    startDate: Date,
-    endDate: Date,
+    startDate: string,
+    endDate: string,
     isActive: boolean
   }

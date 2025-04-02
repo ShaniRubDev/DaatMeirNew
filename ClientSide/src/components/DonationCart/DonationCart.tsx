@@ -212,7 +212,7 @@ const DonationCart: React.FC<DonationCartProps> = ({ setCartVisible }) => {
             ) : (
                 <>
                     <div className="cart-items">
-                        {cart.map((item, index) => (
+                        {cart.map((item:any, index:any) => (
                             // <Card key={index} className="cart-item-card">
                             //     <img
                             //         alt={item.title}
@@ -233,7 +233,7 @@ const DonationCart: React.FC<DonationCartProps> = ({ setCartVisible }) => {
                             <Card key={index} className="cart-item-card">
                                 <img
                                     alt={item.title}
-                                    src={`http://localhost:5000${item.image}`}
+                                    src={`https://daatmeirnew.onrender.com${item.image}`}
                                     className="cart-item-image"
                                 />
                                 <div className="cart-item-content">

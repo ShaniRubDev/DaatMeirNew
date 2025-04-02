@@ -106,7 +106,8 @@ const Announcement = () => {
     const fetchAnnouncement = async () => {
       try {
         const data = await getActiveAnnouncement();
-        setAnnouncement(data);
+        setAnnouncement(data[0]);
+        console.log(data)
       } catch (error) {
         console.error("Error fetching announcement", error);
       }
