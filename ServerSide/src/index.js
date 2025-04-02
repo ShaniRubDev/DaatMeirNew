@@ -108,7 +108,7 @@ console.log("Uploads folder path:", uploadDir);
 
 
 // הגדרות ביניים
-app.use(express.static(path.join(__dirname, 'ClientSide/build'))); // שיתוף קבצי ה-build של React
+app.use(express.static(path.join(__dirname, 'build'))); // שיתוף קבצי ה-build של React
 app.use(cors());
 app.use(express.static(publicPath));
 app.use(cookieParser());
@@ -186,10 +186,8 @@ app.post('/login', async (req, res) => {
     }
 });
 app.get('*', (req, res) => {
-  // console.log(path.join(__dirname, 'ClientSide', 'build', 'index.html'));
-console.log(path.join(__dirname, '..', 'ClientSide', 'build', 'index.html'));
-
-    res.sendFile(path.join(__dirname, '..', 'ClientSide', 'build', 'index.html'));
+    const buildPath = path.join(__dirname, 'build', 'index.html');
+    res.sendFile(buildPath);
 });
 
 // app.get('*', (req, res) => {
