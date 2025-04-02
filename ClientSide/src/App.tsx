@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import { HashRouter } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.scss';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Change import to use BrowserRouter
