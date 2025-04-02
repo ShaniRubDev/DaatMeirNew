@@ -69,6 +69,34 @@ const formatDate = (date) => {
 //         res.status(500).json({ message: "❌ שגיאה ביצירת מודעה" });
 //     }
 // }
+// async function create(req, res) {
+//     try {
+//         // קבלת נתונים מהבקשה
+//         const { title, content, startDate, endDate, isActive } = req.body;
+
+//         // המרת תאריכים לפורמט הנדרש
+//         const formattedStartDate = formatDate(startDate);
+//         const formattedEndDate = formatDate(endDate);
+//         const activeStatus = isActive ? 1 : 0; // הפיכת isActive לערך מספרי
+
+//         // שאילתת SQL
+//         const query_to_announce = `
+//             INSERT INTO announcements (title, content, startDate, endDate, isActive) 
+//             VALUES (?, ?, ?, ?, ?)
+//         `;
+//         const params = [title, content, formattedStartDate, formattedEndDate, activeStatus];
+
+//         // שליחת השאילתה עם הפרמטרים המתאימים
+//         const result = await get_query(query_to_announce, params);
+
+//         // החזרת תשובה מוצלחת
+//         res.status(201).json({ message: "✅ המודעה נוספה בהצלחה!", result });
+//     } catch (error) {
+//         // טיפול בשגיאה
+//         console.log(`the error is: ${error}`);
+//         res.status(500).json({ message: "❌ שגיאה ביצירת מודעה", error: error.message });
+//     }
+// }
 async function create(req, res) {
     try {
         // קבלת נתונים מהבקשה
@@ -77,27 +105,25 @@ async function create(req, res) {
         // המרת תאריכים לפורמט הנדרש
         const formattedStartDate = formatDate(startDate);
         const formattedEndDate = formatDate(endDate);
-        const activeStatus = isActive ? 1 : 0; // הפיכת isActive לערך מספרי
-
+        
         // שאילתת SQL
         const query_to_announce = `
             INSERT INTO announcements (title, content, startDate, endDate, isActive) 
-            VALUES (?, ?, ?, ?, ?)
+            VALUES ($1, $2, $3, $4, $5) RETURNING *;
         `;
-        const params = [title, content, formattedStartDate, formattedEndDate, activeStatus];
+        const params = [title, content, formattedStartDate, formattedEndDate, isActive];
 
         // שליחת השאילתה עם הפרמטרים המתאימים
-        const result = await get_query(query_to_announce, params);
-
+        const result = await create_query(query_to_announce, params);
+        console.log("Query result:", result);
         // החזרת תשובה מוצלחת
-        res.status(201).json({ message: "✅ המודעה נוספה בהצלחה!", result });
+        res.status(201).json({ message: "✅ המודעה נוספה בהצלחה!", result: result});
     } catch (error) {
         // טיפול בשגיאה
         console.log(`the error is: ${error}`);
         res.status(500).json({ message: "❌ שגיאה ביצירת מודעה", error: error.message });
     }
 }
-
 
 async function getActive(req, res) {
     try {
