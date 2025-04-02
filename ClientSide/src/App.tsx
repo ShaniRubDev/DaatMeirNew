@@ -57,7 +57,6 @@ function App() {
    <Provider store={store}>
      <PersistGate loading={null} persistor={persistor}>
        <div className="App" dir="rtl" lang="he">
-         <Routes>
            <Route path="/" element={<Layout />}>
              <Route path='/About' element={<About />} />
              <Route path='/' element={<Home />} />
@@ -75,7 +74,6 @@ function App() {
              <Route path="/register" element={<Register />} />
              <Route path="/manageAn" element={<ManageAnnouncements />} />
            </Route>
-         </Routes>
        </div>
      </PersistGate>
    </Provider>
