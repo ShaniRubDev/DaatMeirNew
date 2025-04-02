@@ -54,37 +54,33 @@ function App() {
 
   return (
         <HashRouter>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <div className="App" dir="rtl" lang="he">
-          <Router>
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route path='/About' element={<About />}></Route>
-                <Route path='/' element={<Home/>}></Route>
-                <Route path="/donation" element={<DonationPage />} />
-                <Route path="/donationCart" element={<DonationCart setCartVisible={setCartVisible} />} />
-                <Route path="/add-basket" element={<AddBasket />} /> {/* נתיב חדש */}
-                <Route path="/manage-basket" element={<DeleteBasket />} /> {/* נתיב חדש */}
-                <Route path="/manage-area" element={<ManageArea />} />
-                <Route path="/add-masage" element={<AddAnnouncement/>} />
-                <Route path = "/thenks" element={<ThankYou/>}></Route>
-                <Route path="/payment" element={<PersonalDetailsForm  />} />
-                <Route path="/DonationsList" element={<DonationsList/>} />
-                <Route path="/DonorsList" element={<DonorsList/>} />
-                <Route path="/Login" element={<Login/>} />
-                <Route path="/register" element={<Register/>} />
-                <Route path="/manageAn" element={<ManageAnnouncements/>} />
+   <Provider store={store}>
+     <PersistGate loading={null} persistor={persistor}>
+       <div className="App" dir="rtl" lang="he">
+         <Routes>
+           <Route path="/" element={<Layout />}>
+             <Route path='/About' element={<About />} />
+             <Route path='/' element={<Home />} />
+             <Route path="/donation" element={<DonationPage />} />
+             <Route path="/donationCart" element={<DonationCart setCartVisible={setCartVisible} />} />
+             <Route path="/add-basket" element={<AddBasket />} />
+             <Route path="/manage-basket" element={<DeleteBasket />} />
+             <Route path="/manage-area" element={<ManageArea />} />
+             <Route path="/add-masage" element={<AddAnnouncement />} />
+             <Route path="/thenks" element={<ThankYou />} />
+             <Route path="/payment" element={<PersonalDetailsForm />} />
+             <Route path="/DonationsList" element={<DonationsList />} />
+             <Route path="/DonorsList" element={<DonorsList />} />
+             <Route path="/Login" element={<Login />} />
+             <Route path="/register" element={<Register />} />
+             <Route path="/manageAn" element={<ManageAnnouncements />} />
+           </Route>
+         </Routes>
+       </div>
+     </PersistGate>
+   </Provider>
+ </HashRouter>
 
-
-
-              </Route>
-            </Routes>
-          </Router>
-        </div>
-      </PersistGate>
-    </Provider>
-        </HashRouter>
 
   );
 }
