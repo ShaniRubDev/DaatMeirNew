@@ -56,6 +56,7 @@ function App() {
         <HashRouter>
    <Provider store={store}>
      <PersistGate loading={null} persistor={persistor}>
+    <Routes>
        <div className="App" dir="rtl" lang="he">
            <Route path="/" element={<Layout />}>
              <Route path='/About' element={<About />} />
@@ -74,6 +75,7 @@ function App() {
              <Route path="/register" element={<Register />} />
              <Route path="/manageAn" element={<ManageAnnouncements />} />
            </Route>
+       </Routes>
        </div>
      </PersistGate>
    </Provider>
