@@ -46,6 +46,8 @@ export const submitBasket = async (formData: FormData): Promise<any> => {
     method: "POST",
     body: formData, // שליחה של ה-FormData
   });
+  console.log("🌍 baseURL:", process.env.REACT_APP_API_BASE_URL);
+
 
   if (!response.ok) {
     throw new Error("Failed to submit basket");
