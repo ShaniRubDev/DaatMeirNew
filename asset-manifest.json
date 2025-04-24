@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/daat-meir/static/css/main.8442d308.css",
+    "main.js": "/daat-meir/static/js/main.dc02234f.js",
+    "static/js/453.68693753.chunk.js": "/daat-meir/static/js/453.68693753.chunk.js",
+    "static/media/primeicons.svg": "/daat-meir/static/media/primeicons.6ed59f962963a4a73af2.svg",
+    "static/media/bootstrap-icons.woff?": "/daat-meir/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
+    "static/media/bootstrap-icons.woff2?": "/daat-meir/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
+    "static/media/primeicons.eot": "/daat-meir/static/media/primeicons.ff0c4cd79b2ffca2de54.eot",
+    "static/media/primeicons.woff": "/daat-meir/static/media/primeicons.8931fda1930c3bd21e96.woff",
+    "static/media/primeicons.ttf": "/daat-meir/static/media/primeicons.a5c2a53d1ff7a9ff5933.ttf",
+    "static/media/primeicons.woff2": "/daat-meir/static/media/primeicons.024b32cc7bf399b1a847.woff2",
+    "index.html": "/daat-meir/index.html",
+    "main.8442d308.css.map": "/daat-meir/static/css/main.8442d308.css.map",
+    "main.dc02234f.js.map": "/daat-meir/static/js/main.dc02234f.js.map",
+    "453.68693753.chunk.js.map": "/daat-meir/static/js/453.68693753.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8442d308.css",
+    "static/js/main.dc02234f.js"
+  ]
+}
