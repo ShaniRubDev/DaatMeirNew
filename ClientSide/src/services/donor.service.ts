@@ -14,6 +14,7 @@ export const saveDonor = async (donorData: {
     try {
         const response = await axios.post(`${API_URL}/save-donor`, donorData);
         console.log("Donor saved:", response.data);
+        console.log("🌍 API_URL:", process.env.REACT_APP_API_BASE_URL);
         return response.data; // מחזיר את הנתונים אם צריך להשתמש בהם
     } catch (error) {
         console.error("Error saving donor:", error);
