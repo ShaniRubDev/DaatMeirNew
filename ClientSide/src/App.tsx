@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.scss';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Change import to use BrowserRouter
+import { BrowserRouter as Router, Routes, Route, HashRouter } from 'react-router-dom'; // Change import to use BrowserRouter
 // import Login from './components/Login/Login';
 // import Signup from './components/Signup/Signup';
 import { configureStore } from '@reduxjs/toolkit';
@@ -52,6 +52,7 @@ function App() {
   const [cartVisible, setCartVisible] = useState(false);
 
   return (
+    <HashRouter>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <div className="App" dir="rtl" lang="he">
@@ -73,15 +74,13 @@ function App() {
                 <Route path="/Login" element={<Login/>} />
                 <Route path="/register" element={<Register/>} />
                 <Route path="/manageAn" element={<ManageAnnouncements/>} />
-
-
-
               </Route>
             </Routes>
           </Router>
         </div>
       </PersistGate>
     </Provider>
+    </HashRouter>
   );
 }
 
