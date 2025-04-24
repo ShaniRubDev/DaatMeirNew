@@ -1,7 +1,8 @@
 import axios from "axios";
 
-const API_URL = "https://daatmeirnew.onrender.com/donor";
-    
+// const API_URL = "https://daatmeirnew.onrender.com/donor";
+const API_URL = `${process.env.REACT_APP_API_BASE_URL}/donor`;
+
 
 export const saveDonor = async (donorData: {
     firstName: string;

@@ -14,12 +14,14 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const toast = useRef(null);
     const navigate = useNavigate();
+    const baseURL = process.env.REACT_APP_API_BASE_URL;
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post("https://daatmeirnew.onrender.com/login", {
+            const response = await axios.post(`${baseURL}/login`, {
                 email,
                 password,
             });

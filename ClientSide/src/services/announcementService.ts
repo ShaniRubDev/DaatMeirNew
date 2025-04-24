@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 // פונקציה לקבלת המודעה הפעילה
-const basePath = 'https://daatmeirnew.onrender.com/announcements'
+const basePath = `${process.env.REACT_APP_API_BASE_URL}/announcements`;
 export const getActiveAnnouncement = async () => {
     try {
         const response = await axios.get(`${basePath}/active`);

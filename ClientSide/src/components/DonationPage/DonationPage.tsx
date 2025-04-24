@@ -74,6 +74,8 @@ const DonationPage: FC<DonationPageProps> = () => {
   const [customAmounts, setCustomAmounts] = useState<{ [key: number]: number }>({});
   const [addedToCart, setAddedToCart] = useState<{ [key: number]: boolean }>({});
   const toast = useRef<Toast>(null);
+  const baseURL = process.env.REACT_APP_API_BASE_URL;
+
   // useEffect(() => {
   //   // שימוש בשירות כדי להביא את התרומות
   //   const fetchDonationOptions = async () => {
@@ -178,7 +180,7 @@ const DonationPage: FC<DonationPageProps> = () => {
               title={option.title}
               subTitle={option.sum ==0 ?null:`${option.sum} ₪`}
               header={
-                <img alt={option.title} src={`https://daatmeirnew.onrender.com${option.image}`} className="donation-image" />
+                <img alt={option.title} src={`${baseURL}${option.image}`} className="donation-image" />
               }
               className="donation-card"
             >

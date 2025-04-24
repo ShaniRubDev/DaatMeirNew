@@ -13,12 +13,14 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const toast = useRef(null);
   const navigate = useNavigate();
+  const baseURL = process.env.REACT_APP_API_BASE_URL;
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('https://daatmeirnew.onrender.com/register', { email, password });
+      const response = await axios.post(`${baseURL}/register`, { email, password });
       toast.current.show({ severity: 'success', summary: 'Success', detail: response.data.message });
       navigate("/manage-area");
     } 
