@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/daat-meir/static/css/main.8442d308.css",
-    "main.js": "/daat-meir/static/js/main.73daf9a7.js",
-    "static/js/453.68693753.chunk.js": "/daat-meir/static/js/453.68693753.chunk.js",
-    "static/media/primeicons.svg": "/daat-meir/static/media/primeicons.6ed59f962963a4a73af2.svg",
-    "static/media/bootstrap-icons.woff?": "/daat-meir/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
-    "static/media/bootstrap-icons.woff2?": "/daat-meir/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
-    "static/media/primeicons.eot": "/daat-meir/static/media/primeicons.ff0c4cd79b2ffca2de54.eot",
-    "static/media/primeicons.woff": "/daat-meir/static/media/primeicons.8931fda1930c3bd21e96.woff",
-    "static/media/primeicons.ttf": "/daat-meir/static/media/primeicons.a5c2a53d1ff7a9ff5933.ttf",
-    "static/media/primeicons.woff2": "/daat-meir/static/media/primeicons.024b32cc7bf399b1a847.woff2",
-    "index.html": "/daat-meir/index.html",
-    "main.8442d308.css.map": "/daat-meir/static/css/main.8442d308.css.map",
-    "main.73daf9a7.js.map": "/daat-meir/static/js/main.73daf9a7.js.map",
-    "453.68693753.chunk.js.map": "/daat-meir/static/js/453.68693753.chunk.js.map"
+    "main.css": "/DaatMeirNew/static/css/main.2fb4498c.css",
+    "main.js": "/DaatMeirNew/static/js/main.31c5bbe1.js",
+    "static/js/453.68693753.chunk.js": "/DaatMeirNew/static/js/453.68693753.chunk.js",
+    "static/media/primeicons.svg": "/DaatMeirNew/static/media/primeicons.6ed59f962963a4a73af2.svg",
+    "static/media/bootstrap-icons.woff?": "/DaatMeirNew/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
+    "static/media/bootstrap-icons.woff2?": "/DaatMeirNew/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
+    "static/media/primeicons.eot": "/DaatMeirNew/static/media/primeicons.ff0c4cd79b2ffca2de54.eot",
+    "static/media/primeicons.woff": "/DaatMeirNew/static/media/primeicons.8931fda1930c3bd21e96.woff",
+    "static/media/primeicons.ttf": "/DaatMeirNew/static/media/primeicons.a5c2a53d1ff7a9ff5933.ttf",
+    "static/media/primeicons.woff2": "/DaatMeirNew/static/media/primeicons.024b32cc7bf399b1a847.woff2",
+    "index.html": "/DaatMeirNew/index.html",
+    "main.2fb4498c.css.map": "/DaatMeirNew/static/css/main.2fb4498c.css.map",
+    "main.31c5bbe1.js.map": "/DaatMeirNew/static/js/main.31c5bbe1.js.map",
+    "453.68693753.chunk.js.map": "/DaatMeirNew/static/js/453.68693753.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8442d308.css",
-    "static/js/main.73daf9a7.js"
+    "static/css/main.2fb4498c.css",
+    "static/js/main.31c5bbe1.js"
   ]
 }
