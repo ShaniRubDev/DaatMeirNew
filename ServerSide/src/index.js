@@ -150,7 +150,7 @@ console.log("Uploads folder path:", uploadDir);
 
 // הגדרות CORS
 const corsOptions = {
-    origin: process.env.REACT_URL, 
+    origin: '*', 
     credentials: true, 
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 };
