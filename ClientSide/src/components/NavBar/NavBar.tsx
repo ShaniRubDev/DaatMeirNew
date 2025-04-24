@@ -120,7 +120,9 @@ const NavBar: FC = () => {
     <div className="NavBar">
       <Navbar  expand="lg" className="navbar">
         <Container>
-          <Navbar.Brand href="/"><img src={`${publicUrl}/images/logo.jpg`}  
+          {/* <Navbar.Brand href="/"> */}
+          <Navbar.Brand onClick={() => navigate("/")}>
+          <img src={`${publicUrl}/images/logo.jpg`}  
            alt="Logo" className="navbar-logo"   style={{ width: "100px", height: "auto", marginRight: "10px" }} />
           דעת מאיר</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
