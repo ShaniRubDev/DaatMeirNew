@@ -18,7 +18,7 @@ const Home: React.FC = () => {
           <p>עזרו לנו להמשיך לתמוך במשפחות, בלומדי תורה ובקהילה</p>
           <button onClick={() => navigate('/donation')} className='cta-button'>לתרומה עכשיו</button>
         </div>
-        <img src="/images/front-view-couple-hands-concept.jpg" alt="רקע העמותה" className="hero-background" />
+        <img src="images/front-view-couple-hands-concept.jpg" alt="רקע העמותה" className="hero-background" />
       </header>
 
       {/* <section className="about">
@@ -50,17 +50,17 @@ const Home: React.FC = () => {
 
       <section className="features">
         <div className="feature">
-          <img src="/images/toraHome.jpg" alt="תמיכה בתורה" />
+          <img src="images/toraHome.jpg" alt="תמיכה בתורה" />
           <h3>תמיכה בלומדי תורה</h3>
           <p>סיוע לאברכים ולתלמידי חכמים ברחבי הארץ.</p>
         </div>
         <div className="feature">
-          <img src="/images/mazonBaket.jpg" alt="עזרה למשפחות" />
+          <img src="images/mazonBaket.jpg" alt="עזרה למשפחות" />
           <h3>סיוע למשפחות נזקקות</h3>
           <p>חלוקת סלי מזון ותמיכה כספית למשפחות במצוקה.</p>
         </div>
         <div className="feature">
-          <img src="/images/SL-091823-63290-23.jpg" alt="חיזוק הקהילה" />
+          <img src="images/SL-091823-63290-23.jpg" alt="חיזוק הקהילה" />
           <h3>חיזוק הקהילה</h3>
           <p>תכניות סיוע, ליווי ותמיכה קהילתית.</p>
         </div>
