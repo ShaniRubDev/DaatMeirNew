@@ -4,6 +4,8 @@ import "./ThankYou.scss";
 
 const ThankYou: React.FC = () => {
   const navigate = useNavigate();
+  const publicUrl = process.env.PUBLIC_URL;
+
 
   return (
     <div className="thank-you">
@@ -15,7 +17,7 @@ const ThankYou: React.FC = () => {
             חזרה לעמוד הבית
           </button>
         </div>
-        <img src="/images/front-view-couple-hands-concept.jpg" alt="תודה" className="hero-background" />
+        <img src={`${publicUrl}/images/front-view-couple-hands-concept.jpg`} alt="תודה" className="hero-background" />
       </header>
 
       <section className="about">

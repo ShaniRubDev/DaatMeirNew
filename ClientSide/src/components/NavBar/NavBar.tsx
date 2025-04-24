@@ -112,14 +112,16 @@ const NavBar: FC = () => {
   const navigate = useNavigate();
   const [cartVisible, setCartVisible] = useState(false);  // מצב של הצגת העגלה
   const cart = useSelector((state: RootState) => state.cart.cartItems);
+    const publicUrl = process.env.PUBLIC_URL;
+
 
 
   return (
     <div className="NavBar">
       <Navbar  expand="lg" className="navbar">
         <Container>
-          <Navbar.Brand href="/"><img src="/images/logo.jpg
-          " alt="Logo" className="navbar-logo"   style={{ width: "100px", height: "auto", marginRight: "10px" }} />
+          <Navbar.Brand href="/"><img src={`${publicUrl}/images/logo.png`}  
+           alt="Logo" className="navbar-logo"   style={{ width: "100px", height: "auto", marginRight: "10px" }} />
           דעת מאיר</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
