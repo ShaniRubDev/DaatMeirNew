@@ -230,6 +230,7 @@ app.post('/login', async (req, res) => {
         res.status(200).json({ message: "Login successful", token });
     } catch (error) {
         console.log("Error logging in:", error);
+            
         res.status(500).json({ message: "Internal server error" });
     }
 });
@@ -246,4 +247,6 @@ app.get('*', (req, res) => {
 // הפעלת השרת
 app.listen(5000, () => {
     console.log(`App is listening on port http://localhost:5000`);
+    console.log(process.env.REACT_URL);
+
 });
