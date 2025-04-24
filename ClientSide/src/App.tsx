@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from '../src/redux/store'; 
+import { store, persistor } from '../src/redux/store';
 
 import './App.scss';
 
@@ -27,37 +27,38 @@ import Register from './components/Register/Register';
 import ManageAnnouncements from './components/ManageAnnouncements/ManageAnnouncements';
 
 function App() {
-  const [cartVisible, setCartVisible] = useState(false);
+    const [cartVisible, setCartVisible] = useState(false);
 
-  return (
-    <HashRouter>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <div className="App" dir="rtl" lang="he">
-            <Routes>
-              <Route path="/" element={<Layout />}>
-                <Route path='/About' element={<About />} />
-                <Route path='/' element={<Home />} />
-                <Route path="/donation" element={<DonationPage />} />
-                <Route path="/donationCart" element={<DonationCart setCartVisible={setCartVisible} />} />
-                <Route path="/add-basket" element={<AddBasket />} />
-                <Route path="/manage-basket" element={<DeleteBasket />} />
-                <Route path="/manage-area" element={<ManageArea />} />
-                <Route path="/add-masage" element={<AddAnnouncement />} />
-                <Route path="/thenks" element={<ThankYou />} />
-                <Route path="/payment" element={<PersonalDetailsForm />} />
-                <Route path="/DonationsList" element={<DonationsList />} />
-                <Route path="/DonorsList" element={<DonorsList />} />
-                <Route path="/Login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/manageAn" element={<ManageAnnouncements />} />
-              </Route>
-            </Routes>
-          </div>
-        </PersistGate>
-      </Provider>
-    </HashRouter>
-  );
+    return (
+        <HashRouter>
+            <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <div className="App" dir="rtl" lang="he">
+                        <Routes>
+                            <Route path="/" element={<Layout />}>
+                                <Route index element={<Home />} />
+                                <Route path='/About' element={<About />} />
+                                {/* <Route path='/' element={<Home />} /> */}
+                                <Route path="/donation" element={<DonationPage />} />
+                                <Route path="/donationCart" element={<DonationCart setCartVisible={setCartVisible} />} />
+                                <Route path="/add-basket" element={<AddBasket />} />
+                                <Route path="/manage-basket" element={<DeleteBasket />} />
+                                <Route path="/manage-area" element={<ManageArea />} />
+                                <Route path="/add-masage" element={<AddAnnouncement />} />
+                                <Route path="/thenks" element={<ThankYou />} />
+                                <Route path="/payment" element={<PersonalDetailsForm />} />
+                                <Route path="/DonationsList" element={<DonationsList />} />
+                                <Route path="/DonorsList" element={<DonorsList />} />
+                                <Route path="/Login" element={<Login />} />
+                                <Route path="/register" element={<Register />} />
+                                <Route path="/manageAn" element={<ManageAnnouncements />} />
+                            </Route>
+                        </Routes>
+                    </div>
+                </PersistGate>
+            </Provider>
+        </HashRouter>
+    );
 }
 
 export default App;
