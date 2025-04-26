@@ -95,9 +95,13 @@ const Home: React.FC = () => {
         <div className="hero-content">
           <h1>היו שותפים בעשיית חסד</h1>
           <p>עזרו לנו להמשיך לתמוך במשפחות, בלומדי תורה ובקהילה</p>
-          <button onClick={() => navigate('/donation')} className="cta-button">
+          {/* <button onClick={() => navigate('/donation')} className="cta-button">
             לתרומה עכשיו
-          </button>
+          </button> */}
+
+<button className="cta-button" onClick={() => navigate('/donation')}>
+          לתרומה עכשיו
+        </button>
         </div>
         <img
           src={`${publicUrl}/images/front-view-couple-hands-concept.jpg`}

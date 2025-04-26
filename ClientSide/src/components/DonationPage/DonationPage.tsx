@@ -147,7 +147,7 @@ const DonationPage: FC<DonationPageProps> = () => {
     dispatch(addToCart({ ...donation, sum: amountToDonate }));
     
     // הוסף את התרומה עם הסכום המעודכן
-    dispatch(addToCart({ ...donation, sum: amountToDonate }));
+    // dispatch(addToCart({ ...donation, sum: amountToDonate }));
 
     // הצגת הודעת הצלחה
     toast.current?.show({

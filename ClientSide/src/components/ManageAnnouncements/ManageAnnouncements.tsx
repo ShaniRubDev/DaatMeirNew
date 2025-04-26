@@ -14,13 +14,13 @@ const ManageAnnouncements = () => {
     const [announcements, setAnnouncements] = useState<AnnouncementsModelFromService[]>([]);
     const navigate = useNavigate();
     const toast = useRef<Toast>(null);
-    const formatDate = (date?: any| null) => {
+    const formatDate = (date?: any | null) => {
         console.log(date)
         if (!date) return 'תאריך לא זמין'; // טיפול במקרה של ערך ריק
         const parsedDate = new Date(date);
         if (isNaN(parsedDate.getTime())) return 'תאריך לא תקף'; // טיפול במקרה שהתאריך לא חוקי
         return format(parsedDate, 'dd/MM/yyyy', { locale: he });
-      };
+    };
 
     useEffect(() => {
         const fetchAnnouncements = async () => {
@@ -67,7 +67,7 @@ const ManageAnnouncements = () => {
                         >
                             <p className="announcement-content">{announcement.content}</p>
                             <p className="announcement-status">
-                                סטטוס: {announcement.isActive ? "לא פעיל":"פעיל" }
+                                סטטוס: {announcement.isActive ? "לא פעיל" : "פעיל"}
                             </p>
                             <Button
                                 icon="pi pi-trash"
@@ -82,6 +82,12 @@ const ManageAnnouncements = () => {
             <button className="add-mesage-btn" onClick={() => navigate("/add-masage")}>
                 <i className="bi bi-plus-lg"></i>
             </button>
+            <div style={{ position: "absolute", top: "150px", right: "20px" }}>
+                <button className="back-manage-btn" onClick={() => navigate("/manage-area")}>
+                    <i className="bi bi-arrow-right" style={{ marginLeft: "8px" }}></i>
+                    חזרה לאזור ניהול אישי
+                </button>
+            </div>
         </div>
     );
 };

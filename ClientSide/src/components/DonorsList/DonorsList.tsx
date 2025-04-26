@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as XLSX from 'xlsx';  // יבוא ספריית אקסל
 import { fetchDonors } from "../../services/donor.service";  // שירות API
 
@@ -8,6 +9,7 @@ const DonorsList = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState<string>("");  // חיפוש לפי שם
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loadDonors = async () => {
@@ -24,7 +26,7 @@ const DonorsList = () => {
 
         loadDonors();
     }, []);
-    const formatDate = (isoDate:any) => {
+    const formatDate = (isoDate: any) => {
         console.log(isoDate)
         const date = new Date(isoDate);
         console.log(date.toLocaleDateString("he-IL"))
@@ -95,6 +97,12 @@ const DonorsList = () => {
                     )}
                 </tbody>
             </table>
+            <div style={{ position: "absolute", top: "150px", right: "20px" }}>
+                <button className="back-manage-btn" onClick={() => navigate("/manage-area")}>
+                    <i className="bi bi-arrow-right" style={{ marginLeft: "8px" }}></i>
+                    חזרה לאזור ניהול אישי
+                </button>
+            </div>
         </div>
     );
 };

@@ -82,6 +82,7 @@ import React, { useEffect, useState } from "react";
 import * as XLSX from 'xlsx';  // יבוא ספריית אקסל
 import { DonationFromServise } from '../../models/DonationFromServise'
 import { fetchDonations } from "../../services/donationsService";
+import { useNavigate } from "react-router-dom";
 
 const DonationsList = () => {
     const [donations, setDonations] = useState<DonationFromServise[]>([]);
@@ -89,6 +90,7 @@ const DonationsList = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState<string>("");  // חיפוש לפי שם
+    const navigate = useNavigate();
 
     useEffect(() => {
         const loadDonations = async () => {
@@ -172,6 +174,12 @@ const DonationsList = () => {
                     )}
                 </tbody>
             </table>
+            <div style={{ position: "absolute", top: "150px", right: "20px" }}>
+                <button className="back-manage-btn" onClick={() => navigate("/manage-area")}>
+                    <i className="bi bi-arrow-right" style={{ marginLeft: "8px" }}></i>
+                    חזרה לאזור ניהול אישי
+                </button>
+            </div>
         </div>
     );
 };

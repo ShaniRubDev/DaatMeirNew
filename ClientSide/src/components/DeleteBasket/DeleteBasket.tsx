@@ -210,6 +210,12 @@ const DeleteBasket = () => {
             <button className="add-basket-btn" onClick={() => navigate("/add-basket")}>
                 <i className="bi bi-plus-lg"></i>
             </button>
+            <div style={{ position: "absolute", top: "150px", right: "20px" }}>
+                <button className="back-manage-btn" onClick={() => navigate("/manage-area")}>
+                    <i className="bi bi-arrow-right" style={{ marginLeft: "8px" }}></i>
+                    חזרה לאזור ניהול אישי
+                </button>
+            </div>
         </div>
     );
 };

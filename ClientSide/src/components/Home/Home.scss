@@ -212,6 +212,7 @@ $border-radius: 10px;
     }
 
     .cta-button {
+        z-index: 10; /* נוסיף את זה לכפתור */
         padding: 12px 30px;
         font-size: 1rem;
         background-color: #66a499;
