@@ -148,12 +148,8 @@ require('dotenv').config(); // טוען את משתני הסביבה מהקוב�
 //     database: process.env.DB_NAME
 // },ssl: { rejectUnauthorized: false });
 const pool = new Pool({
-  host: process.env.PG_HOST,
-  port: 5432,
-  user: 'postgres',
-  password: process.env.PG_PASSWORD,
-  database: 'postgres',
-  ssl: { rejectUnauthorized: false }
+    connectionString: process.env.DATABASE_URL,  // משתנה הסביבה DATABASE_URL מכיל את כתובת החיבור למסד הנתונים
+    ssl: { rejectUnauthorized: false }  // אם יש צורך בחיבור SSL, לדוגמה בסביבת Render
 });
 
 module.exports = pool;
