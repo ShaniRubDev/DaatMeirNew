@@ -224,11 +224,29 @@ const PersonalDetailsForm: React.FC = () => {
                 />
             </div>
 
-            <div className="p-fluid" style={{ marginBottom: "20px" }}>
+{/*             <div className="p-fluid" style={{ marginBottom: "20px" }}>
                 <label style={{ fontSize: "16px", color: "#34495e" }}>טלפון:</label>
                 <InputMask mask="999999999" value={phone} onChange={(e) => setPhone(e.value || "")} style={{ width: "100%", padding: "10px", borderRadius: "5px", borderColor: "#ddd" }} />
-            </div>
+            </div> */}
 
+              <div className="p-fluid" style={{ marginBottom: "20px" }}>
+                                <label style={{ fontSize: "16px", color: "#34495e" }}>טלפון:</label>
+            <InputText
+  value={phone}
+  onChange={(e) => {
+    const newValue = e.target.value;
+    if (/^\d{0,10}$/.test(newValue)) {
+      setPhone(newValue);
+    }
+  }}
+  style={{
+    width: "100%",
+    padding: "10px",
+    borderRadius: "5px",
+    borderColor: "#ddd"
+  }}
+/>
+</div>
             <div className="p-fluid" style={{ marginBottom: "20px" }}>
                 <label style={{ fontSize: "16px", color: "#34495e" }}>מייל:</label>
                 <InputText
