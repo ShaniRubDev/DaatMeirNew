@@ -298,6 +298,9 @@ const PersonalDetailsForm: React.FC = () => {
                 }}
                 src="https://matara.pro/nedarimplus/iframe?language=he"
             ></iframe>
+<p style={{ textAlign: "center", marginTop: "30px", color: "#2c3e50", fontSize: "14px" }}>
+    העמותה רשומה ומוסד ציבורי לעניין תרומות לפי סעיף 46 לפקודת מס הכנסה מספר 580713576
+</p>
 
             <div style={{ display: "flex", justifyContent: "center", marginTop: "30px" }}>
                 <Button label="אישור תשלום" onClick={handlePayment} className="p-button-success" style={{ padding: "10px 20px", fontSize: "16px", borderRadius: "5px" }} />
