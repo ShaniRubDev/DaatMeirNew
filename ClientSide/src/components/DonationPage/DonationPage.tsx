@@ -440,12 +440,13 @@ const DonationPage: FC<DonationPageProps> = () => {
     סניף: 430<br />
     מספר חשבון: 371858<br />
     שם העמותה: דעת מאיר (ע"ר)<br /><br />
-    
     <strong>דוא"ל:</strong><br />
     <a href="mailto:daatmeir@gmail.com">daatmeir@gmail.com</a><br /><br />
     
     <strong>טלפון:</strong><br />
     <a href="tel:035504613">03-5504613</a>
+    <p>    העמותה רשומה ומוסד ציבורי לעניין תרומות לפי סעיף 46 לפקודת מס הכנסה מספר 580713576
+</p>
   </p>
 </Card>
         </div>

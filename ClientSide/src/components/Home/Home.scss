@@ -168,6 +168,175 @@ $border-radius: 10px;
 // }
 
 
+// .home {
+//     * {
+//         font-family: "Heebo", sans-serif;
+//     }
+
+//     color: #333;
+
+//     .hero-background {
+//         width: 100%;
+//         height: 60vh;
+//         object-fit: cover;
+//         opacity: 20%;
+//     }
+
+//     .hero-content {
+//         position: absolute;
+//         top: 50%;
+//         left: 50%;
+//         transform: translate(-50%, -50%);
+//         text-align: center;
+//         width: 90%;
+//     }
+
+//     .hero {
+//         height: 60vh;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+//         text-align: center;
+//         color: #34495e;
+//         padding: 20px;
+//     }
+
+//     .hero-content h1 {
+//         font-size: 2.5rem;
+//         font-weight: bold;
+//     }
+
+//     .hero-content p {
+//         font-size: 1.3rem;
+//         margin-bottom: 20px;
+//     }
+
+//     .cta-button {
+//         z-index: 10; /* נוסיף את זה לכפתור */
+//         padding: 12px 30px;
+//         font-size: 1rem;
+//         background-color: #66a499;
+//         color: white;
+//         border: none;
+//         border-radius: 30px;
+//         cursor: pointer;
+//         transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+//     }
+
+//     .cta-button:hover {
+//         background-color: #c6d2df;
+//         transform: translateY(-3px);
+//     }
+
+//     .about {
+//         background-color: rgba(70, 148, 134, 0.4);
+//         padding: 50px 20px;
+//         display: flex;
+//         justify-content: center;
+
+//         .about-container {
+//             max-width: 800px;
+//             text-align: center;
+//         }
+
+//         .about-title {
+//             font-size: 2rem;
+//             font-weight: bold;
+//             color: #f1f5f9;
+//         }
+
+//         .about-description,
+//         .about-text {
+//             font-size: 1.1rem;
+//             line-height: 1.6;
+//             color: white;
+//         }
+//     }
+
+//     .features {
+//         display: flex;
+//         flex-wrap: wrap;
+//         justify-content: center;
+//         padding: 40px 20px;
+//         gap: 20px;
+//         background-color: #fff;
+//     }
+
+//     .feature {
+//         text-align: center;
+//         flex: 1 1 300px;
+//         max-width: 300px;
+//     }
+
+//     .feature img {
+//         width: 150px;
+//         height: 150px;
+//         object-fit: cover;
+//         border-radius: 50%;
+//         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+//     }
+
+//     .call-to-action {
+//         text-align: center;
+//         padding: 30px 20px;
+//         background-color: #f9f9f9;
+
+//         h2 {
+//             font-size: 1.8rem;
+//             margin-bottom: 15px;
+//         }
+//     }
+
+//     /* מדיה קווריז */
+//     @media (max-width: 768px) {
+//         .hero-content h1 {
+//             font-size: 2rem;
+//         }
+
+//         .hero-content p {
+//             font-size: 1rem;
+//         }
+
+//         .cta-button {
+//             font-size: 0.9rem;
+//             padding: 10px 20px;
+//         }
+
+//         .about-title {
+//             font-size: 1.8rem;
+//         }
+
+//         .about-description,
+//         .about-text {
+//             font-size: 1rem;
+//         }
+//     }
+
+//     @media (max-width: 480px) {
+//         .hero-content h1 {
+//             font-size: 1.8rem;
+//         }
+
+//         .hero-content p {
+//             font-size: 0.9rem;
+//         }
+
+//         .cta-button {
+//             font-size: 0.8rem;
+//             padding: 8px 16px;
+//         }
+
+//         .feature img {
+//             width: 120px;
+//             height: 120px;
+//         }
+
+//         .about-title {
+//             font-size: 1.6rem;
+//         }
+//     }
+// }
+
 .home {
     * {
         font-family: "Heebo", sans-serif;
@@ -175,23 +344,8 @@ $border-radius: 10px;
 
     color: #333;
 
-    .hero-background {
-        width: 100%;
-        height: 60vh;
-        object-fit: cover;
-        opacity: 20%;
-    }
-
-    .hero-content {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-        width: 90%;
-    }
-
     .hero {
+        position: relative;
         height: 60vh;
         display: flex;
         align-items: center;
@@ -199,6 +353,29 @@ $border-radius: 10px;
         text-align: center;
         color: #34495e;
         padding: 20px;
+        overflow: hidden;
+    }
+
+    .hero-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 20%;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 90%;
     }
 
     .hero-content h1 {
@@ -212,7 +389,7 @@ $border-radius: 10px;
     }
 
     .cta-button {
-        z-index: 10; /* נוסיף את זה לכפתור */
+        z-index: 10;
         padding: 12px 30px;
         font-size: 1rem;
         background-color: #66a499;
@@ -287,7 +464,6 @@ $border-radius: 10px;
         }
     }
 
-    /* מדיה קווריז */
     @media (max-width: 768px) {
         .hero-content h1 {
             font-size: 2rem;

@@ -95,6 +95,8 @@ const Home: React.FC = () => {
         <div className="hero-content">
           <h1>היו שותפים בעשיית חסד</h1>
           <p>עזרו לנו להמשיך לתמוך במשפחות, בלומדי תורה ובקהילה</p>
+          <p>    העמותה רשומה ומוסד ציבורי לעניין תרומות לפי סעיף 46 לפקודת מס הכנסה מספר 580713576
+</p>
           {/* <button onClick={() => navigate('/donation')} className="cta-button">
             לתרומה עכשיו
           </button> */}
