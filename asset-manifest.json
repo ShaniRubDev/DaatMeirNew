@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/DaatMeirNew/static/css/main.babae3b8.css",
-    "main.js": "/DaatMeirNew/static/js/main.2cb58747.js",
+    "main.js": "/DaatMeirNew/static/js/main.c63060fa.js",
     "static/js/453.68693753.chunk.js": "/DaatMeirNew/static/js/453.68693753.chunk.js",
     "static/media/primeicons.svg": "/DaatMeirNew/static/media/primeicons.6ed59f962963a4a73af2.svg",
     "static/media/bootstrap-icons.woff?": "/DaatMeirNew/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
@@ -12,11 +12,11 @@
     "static/media/primeicons.woff2": "/DaatMeirNew/static/media/primeicons.024b32cc7bf399b1a847.woff2",
     "index.html": "/DaatMeirNew/index.html",
     "main.babae3b8.css.map": "/DaatMeirNew/static/css/main.babae3b8.css.map",
-    "main.2cb58747.js.map": "/DaatMeirNew/static/js/main.2cb58747.js.map",
+    "main.c63060fa.js.map": "/DaatMeirNew/static/js/main.c63060fa.js.map",
     "453.68693753.chunk.js.map": "/DaatMeirNew/static/js/453.68693753.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.babae3b8.css",
-    "static/js/main.2cb58747.js"
+    "static/js/main.c63060fa.js"
   ]
 }
