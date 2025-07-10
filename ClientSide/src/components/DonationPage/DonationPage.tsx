@@ -156,65 +156,7 @@
 //       className: "custom-toast-secondary",
 //       life: 3000,
 //     });
-//   };
 
-
-
-
-
-//   return (
-//     <div className="DonationPage">
-//       <div className="donation-page">
-//         {/* <h1 className="title">סלי צדקה - ברכה עבורכם</h1> */}
-//         <Link to="/add-basket">
-//           <i className="bi bi-basket-plus" style={{ fontSize: "30px", color: "blue", cursor: "pointer" }}></i>
-//         </Link>
-
-//         <div className="donation-grid">
-//           <Toast ref={toast} position="top-right" />
-
-//           {donationOptions?.map((option, index) => (
-        
-//             <Card
-//               key={index}
-//               title={option.title}
-//               subTitle={option.sum ==0 ?null:`${option.sum} ₪`}
-//               header={
-//                 <img alt={option.title} src={`${baseURL}${option.image}`} className="donation-image" />
-//               }
-//               className="donation-card"
-//             >
-//               <p className="donation-description">{option.description}</p>
-//               {option.sum ==0 ? (
-//                 <div className="flex-auto">
-//                   <label htmlFor={`customAmount-${index}`} className="font-bold block mb-7">
-//                     בחר סכום חודשי:
-//                   </label>
-//                   <InputNumber
-//                     inputId={`customAmount-${index}`}
-//                     // value={customAmount}
-//                     value={customAmounts[index] || 0} 
-//                     useGrouping={false}
-//                     onValueChange={(e) => handleAmountChange(index, e.value ?? 0)}
-//                     placeholder="סכום חודשי"
-//                     className="w-full mt-6"
-//                   />
-//                 </div>
-//               ) : null}
-//               <Button
-//                 label="אני רוצה לתרום"
-//                 onClick={() => handleAddToCart(option, index)}
-//                 className="donate-button m-2"
-//               />
-//             </Card>
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default DonationPage;
 
 
 
@@ -294,6 +236,8 @@ const DonationPage: FC<DonationPageProps> = () => {
   const [addedToCart, setAddedToCart] = useState<{ [key: number]: boolean }>({});
   const toast = useRef<Toast>(null);
   const baseURL = process.env.REACT_APP_API_BASE_URL;
+  const publicUrl = process.env.PUBLIC_URL;
+
 
   // useEffect(() => {
   //   // שימוש בשירות כדי להביא את התרומות
@@ -400,7 +344,9 @@ const DonationPage: FC<DonationPageProps> = () => {
               title={option.title}
               subTitle={option.sum ==0 ?null:`${option.sum} ₪`}
               header={
-                <img alt={option.title} src={`${baseURL}${option.image}`} className="donation-image" />
+                // <img alt={option.title} src={`${baseURL}${option.image}`} className="donation-image" />
+                <img alt={option.title} src={`${publicUrl}/images/SL-091823-63290-23.jpg`} className="donation-image" />
+
               }
               className="donation-card"
             >
